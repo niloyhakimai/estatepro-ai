@@ -7,6 +7,13 @@ import GoogleProvider from "next-auth/providers/google";
 import { ROLES, type AppRole } from "@/lib/roles";
 import { prisma } from "@/lib/prisma";
 
+const googleClientId = process.env.GOOGLE_CLIENT_ID;
+const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET;
+
+export const hasGoogleProviderEnabled = Boolean(
+  googleClientId && googleClientSecret
+);
+
 const providers: NextAuthOptions["providers"] = [
   CredentialsProvider({
     name: "Email and Password",
@@ -62,11 +69,11 @@ const providers: NextAuthOptions["providers"] = [
   }),
 ];
 
-if (process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET) {
+if (hasGoogleProviderEnabled) {
   providers.unshift(
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      clientId: googleClientId!,
+      clientSecret: googleClientSecret!,
     })
   );
 }

@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation"
 import { signIn } from "next-auth/react"
 import { LoaderCircle, LogIn, Sparkles, UserPlus } from "lucide-react"
 
+import { GoogleAuthButton } from "@/components/auth/google-auth-button"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -16,9 +17,10 @@ const DEMO_PASSWORD = "SeedAdmin123!"
 
 type LoginFormProps = {
   callbackUrl: string
+  showGoogleAuth: boolean
 }
 
-export function LoginForm({ callbackUrl }: LoginFormProps) {
+export function LoginForm({ callbackUrl, showGoogleAuth }: LoginFormProps) {
   const router = useRouter()
   const [email, setEmail] = React.useState("")
   const [password, setPassword] = React.useState("")
@@ -85,6 +87,27 @@ export function LoginForm({ callbackUrl }: LoginFormProps) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
+      {showGoogleAuth ? (
+        <>
+          <GoogleAuthButton
+            callbackUrl={callbackUrl}
+            disabled={isPending}
+            label="Continue with Google"
+          />
+
+          <div className="relative py-1">
+            <div className="absolute inset-0 flex items-center">
+              <span className="w-full border-t border-border/60" />
+            </div>
+            <div className="relative flex justify-center">
+              <span className="bg-background/60 px-3 text-[0.7rem] font-bold uppercase tracking-[0.2em] text-muted-foreground">
+                or sign in with email
+              </span>
+            </div>
+          </div>
+        </>
+      ) : null}
+
       <div className="space-y-2">
         <Label htmlFor="login-email">Email Address</Label>
         <Input
@@ -167,7 +190,7 @@ export function LoginForm({ callbackUrl }: LoginFormProps) {
       </div>
 
       <Button asChild variant="link" className="w-full px-0">
-        <Link href="/register">
+        <Link href={`/register?callbackUrl=${encodeURIComponent(callbackUrl)}`}>
           <UserPlus className="size-4" />
           Create a new account instead
         </Link>

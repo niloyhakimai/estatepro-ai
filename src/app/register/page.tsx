@@ -2,13 +2,36 @@
 import { redirect } from "next/navigation"
 import { CheckCircle2, ShieldCheck, Sparkles, ArrowRight } from "lucide-react"
 
-import { getAuthSession } from "@/app/api/auth/[...nextauth]/auth-options"
+import {
+  getAuthSession,
+  hasGoogleProviderEnabled,
+} from "@/app/api/auth/[...nextauth]/auth-options"
 import { RegisterForm } from "@/components/auth/register-form"
 import { getDashboardHomeByRole } from "@/components/dashboard/dashboard-auth"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 
-export default async function RegisterPage() {
+type RegisterPageProps = {
+  searchParams: Promise<Record<string, string | string[] | undefined>>
+}
+
+function getStringParam(value: string | string[] | undefined) {
+  return Array.isArray(value) ? value[0] ?? "" : value ?? ""
+}
+
+function normalizeCallbackUrl(value: string) {
+  if (value.startsWith("/") && !value.startsWith("//")) {
+    return value
+  }
+
+  return "/dashboard"
+}
+
+export default async function RegisterPage({ searchParams }: RegisterPageProps) {
+  const params = await searchParams
+  const callbackUrl = normalizeCallbackUrl(
+    getStringParam(params.callbackUrl).trim() || "/dashboard"
+  )
   const session = await getAuthSession()
 
   if (session?.user) {
@@ -93,7 +116,10 @@ export default async function RegisterPage() {
           </div>
 
           <div className="rounded-[2rem] border border-border/50 bg-background/60 p-6 sm:p-8 shadow-xl backdrop-blur-md">
-            <RegisterForm />
+            <RegisterForm
+              callbackUrl={callbackUrl}
+              showGoogleAuth={hasGoogleProviderEnabled}
+            />
           </div>
 
           <div className="mt-8 text-center sm:text-left">
@@ -101,7 +127,10 @@ export default async function RegisterPage() {
               Already a member?
             </p>
             <Button asChild variant="link" className="mt-1 h-auto p-0 text-primary font-bold text-base hover:no-underline hover:text-primary/80">
-              <Link href="/login?callbackUrl=%2Fdashboard" className="flex items-center">
+              <Link
+                href={`/login?callbackUrl=${encodeURIComponent(callbackUrl)}`}
+                className="flex items-center"
+              >
                 Sign in to your account <ArrowRight className="ml-1 size-4" />
               </Link>
             </Button>

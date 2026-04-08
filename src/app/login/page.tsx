@@ -2,7 +2,10 @@ import Link from "next/link"
 import { redirect } from "next/navigation"
 import { CheckCircle2, ShieldCheck, Sparkles, ArrowRight } from "lucide-react"
 
-import { getAuthSession } from "@/app/api/auth/[...nextauth]/auth-options"
+import {
+  getAuthSession,
+  hasGoogleProviderEnabled,
+} from "@/app/api/auth/[...nextauth]/auth-options"
 import { LoginForm } from "@/components/auth/login-form"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -112,15 +115,21 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
           </div>
 
           <div className="rounded-[2rem] border border-border/50 bg-background/60 p-6 sm:p-8 shadow-xl backdrop-blur-md">
-            <LoginForm callbackUrl={callbackUrl} />
+            <LoginForm
+              callbackUrl={callbackUrl}
+              showGoogleAuth={hasGoogleProviderEnabled}
+            />
           </div>
 
           <div className="mt-8 text-center sm:text-left">
             <p className="text-sm font-medium text-muted-foreground">
-              Don't have an account yet?
+              Don&apos;t have an account yet?
             </p>
             <Button asChild variant="link" className="mt-1 h-auto p-0 text-primary font-bold text-base hover:no-underline hover:text-primary/80">
-              <Link href="/register" className="flex items-center">
+              <Link
+                href={`/register?callbackUrl=${encodeURIComponent(callbackUrl)}`}
+                className="flex items-center"
+              >
                 Create a VIP account <ArrowRight className="ml-1 size-4" />
               </Link>
             </Button>

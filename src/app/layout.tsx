@@ -26,7 +26,12 @@ export default async function RootLayout({
   const session = await getServerSession(authOptions);
 
   return (
-    <html lang="en" suppressHydrationWarning className="h-full antialiased">
+    <html
+      lang="en"
+      suppressHydrationWarning
+      data-scroll-behavior="smooth"
+      className="h-full antialiased"
+    >
       <body className="min-h-full bg-background font-sans text-foreground">
         <AppProviders session={session}>
           <div className="relative flex min-h-screen flex-col overflow-x-clip">
