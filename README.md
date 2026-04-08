@@ -1,36 +1,96 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🏡 EstatePro - AI-Powered Real Estate Platform
 
-## Getting Started
+EstatePro is a modern, feature-rich real estate application built with a focus on seamless user experience and Agentic AI integration. It features a role-based dashboard, dynamic property listings, and AI-powered natural language search capabilities.
 
-First, run the development server:
+> **Note:** This project is currently a Work In Progress (WIP) as part of an ongoing development phase.
+
+---
+
+## ✨ Key Features
+
+- 🤖 **Agentic AI Search:** Natural language property search powered by Groq (LLaMA 3) to automatically filter properties (e.g., "Find me a cheap 3-bedroom place").
+- 💬 **Smart Real Estate Assistant:** A floating AI chatbot to answer user queries and guide them through the platform.
+- 🔐 **Role-Based Authentication:** Secure login system using NextAuth (Credentials & Google Provider) with distinct `USER` and `ADMIN` roles.
+- 📊 **Interactive Dashboards:** Dedicated workspaces for Admins to manage properties/inquiries and for Users to track their interests, complete with Recharts data visualization.
+- 🔍 **Advanced Filtering:** Dynamic server-side filtering for property listings (Location, Price, Bedrooms).
+- 📱 **Fully Responsive UI:** Polished, Dribbble-quality interfaces with Light/Dark mode support.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Framework:** Next.js 16 (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS v4 & Shadcn UI (Radix Primitives)
+- **Database:** PostgreSQL (Neon) with Prisma ORM
+- **Authentication:** NextAuth.js (Auth.js) + bcryptjs
+- **AI Integration:** Groq SDK
+- **Charts:** Recharts
+
+---
+
+## 🚀 Getting Started (Local Development)
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/your-username/estatepro-ai.git
+cd estatepro-ai
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Setup Environment Variables
+
+Create a `.env` file in the root directory and add:
+
+```env
+# Database
+DATABASE_URL="your_neon_postgres_url"
+
+# NextAuth
+NEXTAUTH_URL="http://localhost:3000"
+NEXTAUTH_SECRET="generate_a_random_secret_string"
+GOOGLE_CLIENT_ID="your_google_client_id"
+GOOGLE_CLIENT_SECRET="your_google_client_secret"
+
+# AI Integration (Groq)
+GROQ_API_KEY="your_groq_api_key"
+```
+
+### 4. Database Setup
+
+```bash
+npx prisma db push
+npx prisma generate
+```
+
+### 5. Run the application
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000 in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📈 Current Project Status
 
-## Learn More
+- [x] Phase 1: Database & Foundation Setup  
+- [x] Phase 2: Global Layout, Theming & Auth Shell  
+- [x] Phase 3: Home Page & UI Components  
+- [x] Phase 4: Property Listings & Details (Dynamic Routing)  
+- [x] Phase 5: Role-Based Dashboard & Data Tables  
+- [x] Phase 6: AI Search & Chat Assistant (Groq Integration)  
+- [ ] Final Polish & Deployment (Pending)
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📌 Notes
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Designed and developed as a comprehensive full-stack showcase project with modern UI/UX and AI-powered features.
