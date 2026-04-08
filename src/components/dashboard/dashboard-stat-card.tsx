@@ -2,8 +2,10 @@ import type { LucideIcon } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
+import { cn } from "@/lib/utils"
 
 type DashboardStatCardProps = {
+  className?: string
   description: string
   icon: LucideIcon
   label: string
@@ -11,13 +13,14 @@ type DashboardStatCardProps = {
 }
 
 export function DashboardStatCard({
+  className,
   description,
   icon: Icon,
   label,
   value,
 }: DashboardStatCardProps) {
   return (
-    <Card className="h-full">
+    <Card className={cn("h-full", className)}>
       <CardContent className="space-y-4">
         <div className="flex items-center justify-between gap-3">
           <Badge variant="secondary">{label}</Badge>

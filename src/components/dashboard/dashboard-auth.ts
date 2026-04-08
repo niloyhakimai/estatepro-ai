@@ -1,17 +1,17 @@
-﻿import { Role } from "@prisma/client"
 import { redirect } from "next/navigation"
 
 import { getAuthSession } from "@/app/api/auth/[...nextauth]/auth-options"
+import { ROLES, type AppRole } from "@/lib/roles"
 
 function getSignInHref(callbackUrl: string) {
   return `/login?callbackUrl=${encodeURIComponent(callbackUrl)}`
 }
 
-export function getDashboardHomeByRole(role: Role) {
+export function getDashboardHomeByRole(role: AppRole) {
   switch (role) {
-    case Role.ADMIN:
+    case ROLES.ADMIN:
       return "/dashboard/admin"
-    case Role.MANAGER:
+    case ROLES.MANAGER:
       return "/dashboard/manager"
     default:
       return "/dashboard/user"
@@ -28,7 +28,7 @@ export async function requireDashboardSession(callbackUrl = "/dashboard") {
   return session
 }
 
-async function requireRoleSession(allowedRoles: Role[], callbackUrl: string) {
+async function requireRoleSession(allowedRoles: readonly AppRole[], callbackUrl: string) {
   const session = await requireDashboardSession(callbackUrl)
 
   if (!allowedRoles.includes(session.user.role)) {
@@ -39,17 +39,17 @@ async function requireRoleSession(allowedRoles: Role[], callbackUrl: string) {
 }
 
 export async function requireAdminSession(callbackUrl = "/dashboard/admin") {
-  return requireRoleSession([Role.ADMIN], callbackUrl)
+  return requireRoleSession([ROLES.ADMIN], callbackUrl)
 }
 
 export async function requireManagerSession(callbackUrl = "/dashboard/manager") {
-  return requireRoleSession([Role.MANAGER], callbackUrl)
+  return requireRoleSession([ROLES.MANAGER], callbackUrl)
 }
 
 export async function requireManagerOrAdminSession(callbackUrl = "/dashboard/admin") {
-  return requireRoleSession([Role.ADMIN, Role.MANAGER], callbackUrl)
+  return requireRoleSession([ROLES.ADMIN, ROLES.MANAGER], callbackUrl)
 }
 
 export async function requireUserSession(callbackUrl = "/dashboard/user") {
-  return requireRoleSession([Role.USER], callbackUrl)
+  return requireRoleSession([ROLES.USER], callbackUrl)
 }

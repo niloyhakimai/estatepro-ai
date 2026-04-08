@@ -1,10 +1,10 @@
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import type { Role } from "@prisma/client";
 import { compare } from "bcryptjs";
 import { getServerSession, type NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 
+import { ROLES, type AppRole } from "@/lib/roles";
 import { prisma } from "@/lib/prisma";
 
 const providers: NextAuthOptions["providers"] = [
@@ -85,7 +85,7 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
-        token.role = user.role ?? token.role ?? "USER";
+        token.role = user.role ?? token.role ?? ROLES.USER;
       }
 
       if ((!token.role || !token.id) && token.sub) {
@@ -95,7 +95,7 @@ export const authOptions: NextAuthOptions = {
         });
 
         token.id = token.sub;
-        token.role = dbUser?.role ?? "USER";
+        token.role = dbUser?.role ?? ROLES.USER;
       }
 
       return token;
@@ -103,7 +103,7 @@ export const authOptions: NextAuthOptions = {
     async session({ session, token }) {
       if (session.user) {
         session.user.id = (token.id ?? token.sub ?? "") as string;
-        session.user.role = (token.role as Role | undefined) ?? "USER";
+        session.user.role = (token.role as AppRole | undefined) ?? ROLES.USER;
       }
 
       return session;
