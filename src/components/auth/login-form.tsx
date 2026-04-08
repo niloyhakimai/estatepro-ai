@@ -12,8 +12,8 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { cn } from "@/lib/utils"
 
-const DEMO_EMAIL = "seed-admin@estatepro.local"
-const DEMO_PASSWORD = "SeedAdmin123!"
+const DEMO_EMAIL = "admin@estatepro.local"
+const DEMO_PASSWORD = "12345678"
 
 type LoginFormProps = {
   callbackUrl: string
@@ -146,7 +146,7 @@ export function LoginForm({ callbackUrl, showGoogleAuth }: LoginFormProps) {
         )}
       >
         {error ||
-          "Use your registered credentials, or choose Demo Login to access the seeded admin experience instantly."}
+          "Use your registered credentials, continue with Google, or launch the seeded admin account instantly."}
       </p>
 
       <Button type="submit" size="lg" className="w-full rounded-2xl" disabled={isPending}>
@@ -180,13 +180,16 @@ export function LoginForm({ callbackUrl, showGoogleAuth }: LoginFormProps) {
         ) : (
           <>
             <Sparkles className="size-4" />
-            Demo Login
+            Instant Admin Access
           </>
         )}
       </Button>
 
       <div className="rounded-[1.55rem] border border-border/70 bg-background/70 p-4 text-sm leading-7 text-muted-foreground">
-        Demo credentials: <span className="font-medium text-foreground">{DEMO_EMAIL}</span>
+        Quick admin demo:
+        <span className="ml-1 font-medium text-foreground">{DEMO_EMAIL}</span>
+        <span className="mx-2 text-muted-foreground/60">/</span>
+        <span className="font-medium tracking-[0.14em] text-foreground">{DEMO_PASSWORD}</span>
       </div>
 
       <Button asChild variant="link" className="w-full px-0">

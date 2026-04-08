@@ -15,13 +15,31 @@ const prisma = new PrismaClient({
   log: ["error"],
 })
 
-const seedAdmin = {
-  email: "seed-admin@estatepro.local",
-  image:
-    "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&auto=format&fit=crop&q=80",
-  name: "EstatePro Seed Admin",
-  password: "SeedAdmin123!",
-}
+const demoPassword = "12345678"
+
+const demoAccounts = [
+  {
+    email: "admin@estatepro.local",
+    image:
+      "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&auto=format&fit=crop&q=80",
+    name: "EstatePro Demo Admin",
+    role: Role.ADMIN,
+  },
+  {
+    email: "manager@gmail.com",
+    image:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&auto=format&fit=crop&q=80",
+    name: "EstatePro Demo Manager",
+    role: Role.MANAGER,
+  },
+  {
+    email: "user@estatepro.local",
+    image:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&auto=format&fit=crop&q=80",
+    name: "EstatePro Demo User",
+    role: Role.USER,
+  },
+]
 
 const seedProperties = [
   {
@@ -117,29 +135,39 @@ const seedProperties = [
 ]
 
 async function main() {
-  const passwordHash = await hash(seedAdmin.password, 12)
+  const passwordHash = await hash(demoPassword, 12)
 
-  const owner = await prisma.user.upsert({
-    where: { email: seedAdmin.email },
-    update: {
-      image: seedAdmin.image,
-      name: seedAdmin.name,
-      password: passwordHash,
-      role: Role.ADMIN,
-    },
-    create: {
-      email: seedAdmin.email,
-      image: seedAdmin.image,
-      name: seedAdmin.name,
-      password: passwordHash,
-      role: Role.ADMIN,
-    },
-    select: {
-      email: true,
-      id: true,
-      role: true,
-    },
-  })
+  const seededUsers = await Promise.all(
+    demoAccounts.map((account) =>
+      prisma.user.upsert({
+        where: { email: account.email },
+        update: {
+          image: account.image,
+          name: account.name,
+          password: passwordHash,
+          role: account.role,
+        },
+        create: {
+          email: account.email,
+          image: account.image,
+          name: account.name,
+          password: passwordHash,
+          role: account.role,
+        },
+        select: {
+          email: true,
+          id: true,
+          role: true,
+        },
+      })
+    )
+  )
+
+  const owner = seededUsers.find((account) => account.role === Role.ADMIN)
+
+  if (!owner) {
+    throw new Error("Admin demo account could not be provisioned.")
+  }
 
   await prisma.$transaction(async (tx) => {
     await tx.property.deleteMany({
@@ -160,8 +188,14 @@ async function main() {
   console.log("")
   console.log("EstatePro seed complete.")
   console.log(`Seed owner: ${owner.email} (${owner.role})`)
-  console.log(`Seed password: ${seedAdmin.password}`)
+  console.log(`Shared demo password: ${demoPassword}`)
   console.log(`Properties inserted: ${seedProperties.length}`)
+  console.log("Demo accounts:")
+
+  for (const account of seededUsers) {
+    console.log(`- ${account.role}: ${account.email}`)
+  }
+
   console.log("Seeded listings:")
 
   for (const property of seedProperties) {

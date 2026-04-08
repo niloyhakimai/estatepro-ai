@@ -1,31 +1,54 @@
-# 🏡 EstatePro - AI-Powered Real Estate Platform
+# 🏡 EstatePro - AI-Powered Luxury Real Estate Platform
 
-EstatePro is a modern, feature-rich real estate application built with a focus on seamless user experience and Agentic AI integration. It features a role-based dashboard, dynamic property listings, and AI-powered natural language search capabilities.
+EstatePro is a modern, premium, and feature-rich real estate application built with a focus on seamless user experience, luxury aesthetics (Glassmorphism), and Agentic AI integration. It features a role-based executive dashboard, dynamic property listings, and AI-powered natural language search capabilities.
 
-> **Note:** This project is currently a Work In Progress (WIP) as part of an ongoing development phase.
+---
+
+## 🔐 Demo Credentials
+
+Use these accounts to explore the role-based features and administrative dashboards of the platform:
+
+### Administrator
+- Email: `admin@estatepro.local`
+- Password: `12345678`
+
+### Property Manager
+- Email: `manager@gmail.com`
+- Password: `12345678`
+
+### Standard Client
+- Email: `user@estatepro.local`
+- Password: `12345678`
 
 ---
 
 ## ✨ Key Features
 
-- 🤖 **Agentic AI Search:** Natural language property search powered by Groq (LLaMA 3) to automatically filter properties (e.g., "Find me a cheap 3-bedroom place").
-- 💬 **Smart Real Estate Assistant:** A floating AI chatbot to answer user queries and guide them through the platform.
-- 🔐 **Role-Based Authentication:** Secure login system using NextAuth (Credentials & Google Provider) with distinct `USER` and `ADMIN` roles.
-- 📊 **Interactive Dashboards:** Dedicated workspaces for Admins to manage properties/inquiries and for Users to track their interests, complete with Recharts data visualization.
-- 🔍 **Advanced Filtering:** Dynamic server-side filtering for property listings (Location, Price, Bedrooms).
-- 📱 **Fully Responsive UI:** Polished, Dribbble-quality interfaces with Light/Dark mode support.
+- 🤖 **Agentic AI Search:** Natural language property search powered by Groq (LLaMA 3.1 70B) to automatically filter properties  
+  Example: `"Find me a cheap 3-bedroom place"`
+
+- 💬 **Smart Real Estate Assistant:** A floating AI chatbot to answer user queries and guide them through the platform  
+
+- 🔐 **Role-Based Authentication:** Secure login system using NextAuth (Credentials & Google Provider) with distinct `ADMIN`, `MANAGER`, and `USER` roles  
+
+- 📊 **Interactive Executive Dashboards:** Dedicated workspaces for Admins and Users with Recharts data visualization  
+
+- 🔍 **Advanced Filtering:** Dynamic server-side filtering for property listings by location, price, and bedrooms  
+
+- 📱 **Luxury Responsive UI:** Glassmorphism design, smooth animations, and Light/Dark mode support  
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Framework:** Next.js 16 (App Router)
-- **Language:** TypeScript
-- **Styling:** Tailwind CSS v4 & Shadcn UI (Radix Primitives)
-- **Database:** PostgreSQL (Neon) with Prisma ORM
-- **Authentication:** NextAuth.js (Auth.js) + bcryptjs
-- **AI Integration:** Groq SDK
-- **Charts:** Recharts
+- **Framework:** Next.js 15+ (App Router)  
+- **Language:** TypeScript  
+- **Styling & UI:** Tailwind CSS v4, Framer Motion, Shadcn UI  
+- **Database:** PostgreSQL (Neon) with Prisma ORM  
+- **Authentication:** NextAuth.js (Auth.js) + bcryptjs  
+- **AI Engine:** Groq SDK  
+- **State & Data:** Next-Safe-Action  
+- **Monitoring:** Recharts  
 
 ---
 
@@ -79,15 +102,12 @@ Open http://localhost:3000 in your browser.
 
 ---
 
-## 📈 Current Project Status
+## 🏁 Final Project Status
 
-- [x] Phase 1: Database & Foundation Setup  
-- [x] Phase 2: Global Layout, Theming & Auth Shell  
-- [x] Phase 3: Home Page & UI Components  
-- [x] Phase 4: Property Listings & Details (Dynamic Routing)  
-- [x] Phase 5: Role-Based Dashboard & Data Tables  
-- [x] Phase 6: AI Search & Chat Assistant (Groq Integration)  
-- [ ] Final Polish & Deployment (Pending)
+- [x] Phase 1-6: Core Infrastructure & AI Integration (Completed)  
+- [x] UI/UX Overhaul: Luxury Glassmorphism & Responsive Fixes (Completed)  
+- [x] Optimization: Image Fallbacks & Server-Side Filtering (Completed)  
+- [x] Vercel Deployment & Live Demo (Completed)  
 
 ---
 
