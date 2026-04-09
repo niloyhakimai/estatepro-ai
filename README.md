@@ -113,5 +113,6 @@ Open http://localhost:3000 in your browser.
 
 ## 📌 Notes
 
-Designed and developed as a comprehensive full-stack showcase project with modern UI/UX and AI-powered features. 
+Designed and developed as a comprehensive full-stack showcase project with modern UI/UX and AI-powered features.
+
 Architecture Note: This project leverages the Next.js App Router as a unified Full-Stack solution, utilizing Server Actions and Route Handlers for robust backend logic and secure database operations.
