@@ -1,58 +1,68 @@
-# 🏡 EstatePro - AI-Powered Luxury Real Estate Platform
+# EstatePro
 
-EstatePro is a modern, premium, and feature-rich real estate application built with a focus on seamless user experience, luxury aesthetics (Glassmorphism), and Agentic AI integration. It features a role-based executive dashboard, dynamic property listings, and AI-powered natural language search capabilities.
+EstatePro is a premium full-stack real estate platform built with Next.js, React, Prisma, PostgreSQL, and Groq-powered AI experiences. It combines a polished marketing site, a searchable property catalog, role-based dashboards, and AI-assisted discovery flows in one App Router application.
 
----
+## Overview
 
-## 🔐 Demo Credentials
+The project is designed as a complete real estate product rather than a single landing page. Visitors can browse curated listings, filter inventory through shareable URL parameters, inspect property detail pages, and submit inquiries. Authenticated users get personalized dashboard access, while managers and admins can monitor listings, user activity, and inquiry trends.
 
-Use these accounts to explore the role-based features and administrative dashboards of the platform:
+## Core Features
 
-### Administrator
-- Email: `admin@estatepro.local`
-- Password: `12345678`
+- AI-powered property search that converts natural language prompts into structured filters.
+- Floating real estate assistant chat powered by Groq.
+- Credentials-based authentication with optional Google sign-in.
+- Role-aware dashboard routing for `ADMIN`, `MANAGER`, and `USER`.
+- Admin and manager tools for property management, inquiry tracking, and portfolio insights.
+- User dashboard views for inquiries and account management.
+- Property detail pages with gallery views, related listings, and inquiry submission.
+- Responsive premium UI with theme switching and modern glass-inspired styling.
+- Seeded demo data so the app can be explored immediately after setup.
 
-### Property Manager
-- Email: `manager@gmail.com`
-- Password: `12345678`
+## Demo Accounts
 
-### Standard Client
-- Email: `user@estatepro.local`
-- Password: `12345678`
+Use these seeded accounts after running the database seed:
 
----
+- Admin: `admin@estatepro.local` / `12345678`
+- Manager: `manager@gmail.com` / `12345678`
+- User: `user@estatepro.local` / `12345678`
 
-## ✨ Key Features
+## Tech Stack
 
-- 🤖 **Agentic AI Search:** Natural language property search powered by Groq (LLaMA 3.1 70B) to automatically filter properties  
-  Example: `"Find me a cheap 3-bedroom place"`
+- Framework: Next.js `16.2.2` with App Router
+- Runtime UI: React `19.2.4`
+- Language: TypeScript
+- Styling: Tailwind CSS `v4`, Radix UI, shadcn/ui, Lucide icons
+- Authentication: NextAuth.js with Prisma Adapter
+- Database: PostgreSQL with Prisma `7` and `@prisma/adapter-pg`
+- AI: Groq SDK
+- Charts: Recharts
 
-- 💬 **Smart Real Estate Assistant:** A floating AI chatbot to answer user queries and guide them through the platform  
+## App Areas
 
-- 🔐 **Role-Based Authentication:** Secure login system using NextAuth (Credentials & Google Provider) with distinct `ADMIN`, `MANAGER`, and `USER` roles  
+### Public Experience
 
-- 📊 **Interactive Executive Dashboards:** Dedicated workspaces for Admins and Users with Recharts data visualization  
+- Home page with featured inventory and guided search.
+- About, contact, and privacy pages.
+- Explore page with filtering, sorting, pagination, and shareable search state.
+- Property detail pages with inquiry actions and related property suggestions.
 
-- 🔍 **Advanced Filtering:** Dynamic server-side filtering for property listings by location, price, and bedrooms  
+### Dashboard Experience
 
-- 📱 **Luxury Responsive UI:** Glassmorphism design, smooth animations, and Light/Dark mode support  
+- `/dashboard/admin` for platform-level overview and analytics.
+- `/dashboard/admin/properties` for listing management.
+- `/dashboard/admin/inquiries` for tracking buyer conversations.
+- `/dashboard/admin/users` for account oversight.
+- `/dashboard/manager` for manager-focused portfolio monitoring.
+- `/dashboard/user` and `/dashboard/user/inquiries` for client activity.
+- `/dashboard/profile` for profile and account updates.
 
----
+### AI Experience
 
-## 🛠️ Tech Stack
+- `/api/ai-search` for prompt-to-filter property discovery.
+- `/api/chat` for conversational assistance.
+- `/api/suggestions` for lightweight search suggestions.
 
-- **Framework:** Next.js 15+ (App Router)  
-- **Language:** TypeScript  
-- **Styling & UI:** Tailwind CSS v4, Framer Motion, Shadcn UI  
-- **Database:** PostgreSQL (Neon) with Prisma ORM  
-- **Authentication:** NextAuth.js (Auth.js) + bcryptjs  
-- **AI Engine:** Groq SDK  
-- **State & Data:** Next-Safe-Action  
-- **Monitoring:** Recharts  
-
----
-
-## 🚀 Getting Started (Local Development)
+## Local Development
 
 ### 1. Clone the repository
 
@@ -67,52 +77,64 @@ cd estatepro-ai
 npm install
 ```
 
-### 3. Setup Environment Variables
+### 3. Configure environment variables
 
-Create a `.env` file in the root directory and add:
+Create a `.env` file in the project root:
 
 ```env
-# Database
-DATABASE_URL="your_neon_postgres_url"
+DATABASE_URL="your_postgresql_connection_string"
+DIRECT_URL="your_optional_direct_database_url"
 
-# NextAuth
 NEXTAUTH_URL="http://localhost:3000"
-NEXTAUTH_SECRET="generate_a_random_secret_string"
+NEXTAUTH_SECRET="your_random_secret"
+
 GOOGLE_CLIENT_ID="your_google_client_id"
 GOOGLE_CLIENT_SECRET="your_google_client_secret"
 
-# AI Integration (Groq)
 GROQ_API_KEY="your_groq_api_key"
 ```
 
-### 4. Database Setup
+Notes:
+
+- `DIRECT_URL` is optional, but supported by the Prisma config.
+- Google sign-in is only enabled when both Google credentials are present.
+
+### 4. Prepare the database
 
 ```bash
 npx prisma db push
 npx prisma generate
+node prisma/seed.mjs
 ```
 
-### 5. Run the application
+### 5. Start the app
 
 ```bash
 npm run dev
 ```
 
-Open http://localhost:3000 in your browser.
+Open `http://localhost:3000`.
 
----
+## Available Scripts
 
-## 🏁 Final Project Status
+- `npm run dev` starts the local development server.
+- `npm run build` creates the production build.
+- `npm run start` runs the production server.
+- `npm run lint` runs ESLint.
 
-- [x] Phase 1-6: Core Infrastructure & AI Integration (Completed)  
-- [x] UI/UX Overhaul: Luxury Glassmorphism & Responsive Fixes (Completed)  
-- [x] Optimization: Image Fallbacks & Server-Side Filtering (Completed)  
-- [x] Vercel Deployment & Live Demo (Completed)  
+## Final Project Status
 
----
+- [x] Premium responsive marketing site
+- [x] Explore listings with filtering, sorting, and pagination
+- [x] Property details and inquiry flow
+- [x] Role-based authentication and protected dashboards
+- [x] Admin, manager, and user dashboard experiences
+- [x] AI search and chat integrations
+- [x] Prisma schema, seed data, and demo accounts
 
-## 📌 Notes
+## Architecture Notes
 
-Designed and developed as a comprehensive full-stack showcase project with modern UI/UX and AI-powered features.
-
-Architecture Note: This project leverages the Next.js App Router as a unified Full-Stack solution, utilizing Server Actions and Route Handlers for robust backend logic and secure database operations.
+- The app uses the Next.js App Router as a unified full-stack architecture.
+- Server components, route handlers, and server actions are used across the product.
+- Authentication state and dashboard access are enforced by role-aware session utilities.
+- Prisma is configured through the PostgreSQL adapter and shared through a singleton client.
