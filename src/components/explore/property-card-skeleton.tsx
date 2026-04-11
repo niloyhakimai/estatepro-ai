@@ -1,29 +1,41 @@
-import { Card, CardContent } from "@/components/ui/card"
-import { Skeleton } from "@/components/ui/skeleton"
+"use client"
 
-export function PropertyCardSkeleton() {
+import { Card, CardContent, CardFooter } from "@/components/ui/card"
+import { Skeleton } from "@/components/ui/skeleton"
+import { cn } from "@/lib/utils"
+
+export function PropertyCardSkeleton({ className }: { className?: string }) {
   return (
-    <Card className="overflow-hidden border-border/40 bg-background/60 shadow-lg backdrop-blur-sm rounded-[2.5rem]">
-      <CardContent className="space-y-6 p-5">
-        <Skeleton className="aspect-[4/3] w-full rounded-[2rem] bg-secondary/50" />
-        
-        <div className="space-y-4 pt-2">
-          <div className="space-y-2.5">
-            <Skeleton className="h-7 w-4/5 bg-secondary/50" />
-            <Skeleton className="h-4 w-3/5 bg-secondary/50" />
+    <Card
+      className={cn(
+        "flex h-full flex-col overflow-hidden rounded-[2rem] border border-black/5 bg-white/60 shadow-[0_28px_90px_-54px_rgba(15,23,42,0.15)] backdrop-blur-xl dark:border-white/10 dark:bg-black/40 dark:shadow-[0_28px_90px_-54px_rgba(0,0,0,0.8)]",
+        className
+      )}
+    >
+      <CardContent className="flex flex-1 flex-col gap-5 p-4">
+        {/* Image Placeholder - Matching aspect-[1.08] */}
+        <Skeleton className="aspect-[1.08] w-full rounded-[1.45rem] bg-black/5 dark:bg-white/5" />
+
+        <div className="flex flex-1 flex-col gap-4 px-1">
+          {/* Title & Location Placeholder */}
+          <div className="space-y-3 pt-1">
+            <Skeleton className="h-6 w-4/5 rounded-md bg-black/5 dark:bg-white/5" />
+            <Skeleton className="h-4 w-1/2 rounded-md bg-black/5 dark:bg-white/5" />
           </div>
-          
-          <Skeleton className="h-8 w-2/5 bg-secondary/50" />
-          
-          <div className="grid grid-cols-3 gap-3 pt-2">
-            <Skeleton className="h-20 rounded-2xl bg-secondary/50" />
-            <Skeleton className="h-20 rounded-2xl bg-secondary/50" />
-            <Skeleton className="h-20 rounded-2xl bg-secondary/50" />
+
+          {/* Metrics Grid Placeholder */}
+          <div className="mt-auto grid grid-cols-3 gap-3">
+            <Skeleton className="h-[5.5rem] w-full rounded-[1.15rem] bg-black/5 dark:bg-white/5" />
+            <Skeleton className="h-[5.5rem] w-full rounded-[1.15rem] bg-black/5 dark:bg-white/5" />
+            <Skeleton className="h-[5.5rem] w-full rounded-[1.15rem] bg-black/5 dark:bg-white/5" />
           </div>
         </div>
-        
-        <Skeleton className="h-12 w-full rounded-xl mt-4 bg-secondary/50" />
       </CardContent>
+
+      <CardFooter className="mt-auto px-5 pb-5 pt-0">
+        {/* Button Placeholder */}
+        <Skeleton className="h-12 w-full rounded-[1.15rem] bg-black/5 dark:bg-white/5" />
+      </CardFooter>
     </Card>
   )
 }

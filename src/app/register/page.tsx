@@ -39,7 +39,7 @@ export default async function RegisterPage({ searchParams }: RegisterPageProps) 
   }
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center p-4 sm:p-8">
+    <div className="relative flex min-h-screen items-center justify-center p-4 sm:p-8">
       {/* --- FULLSCREEN BACKGROUND --- */}
       <div className="absolute inset-0 z-0">
         <img
@@ -47,23 +47,23 @@ export default async function RegisterPage({ searchParams }: RegisterPageProps) 
           alt="Luxury Villa Exterior"
           className="h-full w-full object-cover object-center"
         />
-        <div className="absolute inset-0 bg-slate-950/60 backdrop-blur-sm mix-blend-multiply" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/10 via-background/40 to-background/90" />
+        <div className="absolute inset-0 bg-slate-100/70 backdrop-blur-md transition-colors duration-500 dark:bg-slate-950/80" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/50 to-white/90 transition-colors duration-500 dark:via-black/50 dark:to-black/90" />
       </div>
 
       {/* --- GLASSMORPHIC MAIN PANEL --- */}
-      <div className="relative z-10 w-full max-w-6xl grid overflow-hidden rounded-[2.5rem] sm:rounded-[3rem] border border-white/10 bg-background/80 shadow-2xl backdrop-blur-xl lg:grid-cols-[1.1fr_1fr]">
+      <div className="relative z-10 grid w-full max-w-6xl overflow-hidden rounded-[2.5rem] border border-black/5 bg-white/70 shadow-[0_38px_110px_-42px_rgba(15,23,42,0.3)] backdrop-blur-2xl transition-colors duration-500 dark:border-white/10 dark:bg-black/60 dark:shadow-[0_38px_110px_-42px_rgba(0,0,0,0.8)] sm:rounded-[3rem] lg:grid-cols-[1.1fr_1fr]">
         
         {/* Left Side: Brand & Info */}
         <div className="flex flex-col justify-between p-8 sm:p-12 lg:p-16">
           <div className="space-y-6">
-            <Badge variant="outline" className="border-primary/30 bg-primary/10 text-primary py-1.5 px-4 backdrop-blur-md">
+            <Badge variant="secondary" className="bg-primary/10 px-4 py-1.5 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-primary shadow-sm backdrop-blur-md dark:bg-primary/20">
               Exclusive Membership
             </Badge>
-            <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+            <h1 className="text-4xl font-black tracking-tight text-slate-900 transition-colors dark:text-white sm:text-5xl">
               Create your VIP account.
             </h1>
-            <p className="max-w-md text-lg leading-relaxed text-muted-foreground">
+            <p className="max-w-md text-lg font-medium leading-relaxed text-slate-600 transition-colors dark:text-white/70">
               Join EstatePro to manage your luxury portfolio, save exclusive listings, and connect directly with elite advisors.
             </p>
           </div>
@@ -88,16 +88,16 @@ export default async function RegisterPage({ searchParams }: RegisterPageProps) 
             ].map(({ description, icon: Icon, title }) => (
               <div
                 key={title}
-                className="group flex items-start gap-4 rounded-2xl border border-border/30 bg-background/40 p-4 transition-all hover:bg-background/80 hover:shadow-md"
+                className="group flex items-start gap-4 rounded-2xl border border-black/5 bg-white/50 p-4 shadow-sm backdrop-blur-md transition-all hover:-translate-y-0.5 hover:bg-white/80 hover:shadow-md dark:border-white/10 dark:bg-black/40 dark:hover:bg-white/[0.05]"
               >
-                <span className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary transition-transform group-hover:scale-110">
+                <span className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary transition-transform group-hover:scale-110 dark:bg-primary/20">
                   <Icon className="size-5" />
                 </span>
                 <div>
-                  <h2 className="text-base font-bold text-foreground">
+                  <h2 className="text-base font-bold text-slate-900 transition-colors dark:text-white">
                     {title}
                   </h2>
-                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                  <p className="mt-1 text-sm font-medium leading-relaxed text-slate-500 transition-colors dark:text-white/60">
                     {description}
                   </p>
                 </div>
@@ -107,15 +107,15 @@ export default async function RegisterPage({ searchParams }: RegisterPageProps) 
         </div>
 
         {/* Right Side: Register Form */}
-        <div className="flex flex-col justify-center border-t border-white/10 bg-card/40 p-8 sm:p-12 lg:border-l lg:border-t-0 lg:p-16">
-          <div className="space-y-6 mb-8 text-center sm:text-left">
-            <h2 className="text-3xl font-bold text-foreground">Register</h2>
-            <p className="text-sm font-medium text-muted-foreground">
+        <div className="flex flex-col justify-center border-t border-black/5 bg-white/40 p-8 transition-colors dark:border-white/10 dark:bg-black/40 sm:p-12 lg:border-l lg:border-t-0 lg:p-16">
+          <div className="mb-8 space-y-3 text-center sm:text-left">
+            <h2 className="text-3xl font-black tracking-tight text-slate-900 dark:text-white sm:text-4xl">Register</h2>
+            <p className="text-sm font-medium text-slate-500 dark:text-white/60">
               Set up your credentials to access the private network.
             </p>
           </div>
 
-          <div className="rounded-[2rem] border border-border/50 bg-background/60 p-6 sm:p-8 shadow-xl backdrop-blur-md">
+          <div className="rounded-[2.5rem] border border-black/5 bg-white/60 p-6 shadow-xl backdrop-blur-xl transition-colors dark:border-white/10 dark:bg-black/40 sm:p-8">
             <RegisterForm
               callbackUrl={callbackUrl}
               showGoogleAuth={hasGoogleProviderEnabled}
@@ -123,10 +123,10 @@ export default async function RegisterPage({ searchParams }: RegisterPageProps) 
           </div>
 
           <div className="mt-8 text-center sm:text-left">
-            <p className="text-sm font-medium text-muted-foreground">
+            <p className="text-sm font-medium text-slate-500 dark:text-white/60">
               Already a member?
             </p>
-            <Button asChild variant="link" className="mt-1 h-auto p-0 text-primary font-bold text-base hover:no-underline hover:text-primary/80">
+            <Button asChild variant="link" className="mt-1 h-auto p-0 text-base font-bold text-primary hover:text-primary/80 hover:no-underline">
               <Link
                 href={`/login?callbackUrl=${encodeURIComponent(callbackUrl)}`}
                 className="flex items-center"

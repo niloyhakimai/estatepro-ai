@@ -39,7 +39,7 @@ function DropdownMenuContent({
         data-slot="dropdown-menu-content"
         sideOffset={sideOffset}
         className={cn(
-          "z-50 min-w-56 origin-[var(--radix-dropdown-menu-content-transform-origin)] overflow-hidden rounded-2xl border border-border/70 bg-popover/95 p-1.5 text-popover-foreground shadow-[0_24px_80px_-48px_rgba(15,23,42,0.75)] backdrop-blur-xl transition-all duration-200 data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1 data-[state=closed]:scale-95 data-[state=closed]:opacity-0 data-[state=open]:scale-100 data-[state=open]:opacity-100",
+          "z-50 min-w-56 origin-[var(--radix-dropdown-menu-content-transform-origin)] overflow-hidden rounded-2xl border border-border/70 bg-popover/95 p-1.5 text-popover-foreground shadow-[0_24px_80px_-48px_rgba(15,23,42,0.75)] backdrop-blur-xl transition-all duration-200 data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1 data-[state=closed]:scale-95 data-[state=closed]:opacity-0 data-[state=open]:scale-100 data-[state=open]:opacity-100 dark:border-white/10 dark:bg-[#0f1720]/95 dark:shadow-[0_30px_90px_-50px_rgba(2,10,20,0.92)]",
           className
         )}
         {...props}
@@ -138,12 +138,12 @@ function DropdownMenuSubContent({
     <DropdownMenuPrimitive.SubContent
       data-slot="dropdown-menu-sub-content"
       sideOffset={sideOffset}
-      className={cn(
-        "z-50 min-w-48 origin-[var(--radix-dropdown-menu-content-transform-origin)] overflow-hidden rounded-2xl border border-border/70 bg-popover/95 p-1.5 text-popover-foreground shadow-[0_24px_80px_-48px_rgba(15,23,42,0.75)] backdrop-blur-xl transition-all duration-200 data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1 data-[state=closed]:scale-95 data-[state=closed]:opacity-0 data-[state=open]:scale-100 data-[state=open]:opacity-100",
-        className
-      )}
-      {...props}
-    />
+        className={cn(
+          "z-50 min-w-48 origin-[var(--radix-dropdown-menu-content-transform-origin)] overflow-hidden rounded-2xl border border-border/70 bg-popover/95 p-1.5 text-popover-foreground shadow-[0_24px_80px_-48px_rgba(15,23,42,0.75)] backdrop-blur-xl transition-all duration-200 data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1 data-[state=closed]:scale-95 data-[state=closed]:opacity-0 data-[state=open]:scale-100 data-[state=open]:opacity-100 dark:border-white/10 dark:bg-[#0f1720]/95 dark:shadow-[0_30px_90px_-50px_rgba(2,10,20,0.92)]",
+          className
+        )}
+        {...props}
+      />
   )
 }
 

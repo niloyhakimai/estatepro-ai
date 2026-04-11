@@ -23,7 +23,7 @@ export function ThemeToggle({ className }: { className?: string }) {
       variant="outline"
       size="icon"
       className={cn(
-        "relative rounded-full border-border/70 bg-background/80 shadow-sm backdrop-blur-sm",
+        "relative rounded-full border-border/70 bg-background/80 shadow-sm backdrop-blur-md transition-colors duration-300 dark:border-white/10 dark:bg-white/[0.05] dark:hover:bg-white/[0.12]",
         className
       )}
       aria-label={mounted ? `Switch to ${isDark ? "light" : "dark"} mode` : "Toggle theme"}
@@ -31,13 +31,13 @@ export function ThemeToggle({ className }: { className?: string }) {
     >
       <SunMedium
         className={cn(
-          "size-4 transition-all duration-200",
+          "size-4 transition-all duration-300",
           isDark ? "rotate-90 scale-0 opacity-0" : "rotate-0 scale-100 opacity-100"
         )}
       />
       <MoonStar
         className={cn(
-          "absolute size-4 transition-all duration-200",
+          "absolute size-4 transition-all duration-300",
           isDark ? "rotate-0 scale-100 opacity-100" : "-rotate-90 scale-0 opacity-0"
         )}
       />

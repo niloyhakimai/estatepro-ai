@@ -1,12 +1,11 @@
-﻿"use client"
+"use client"
 
 import Link from "next/link"
-import { LogOut, LayoutDashboard, UserCircle, ShieldCheck, UserCog } from "lucide-react"
+import { LayoutDashboard, LogOut, ShieldCheck, UserCircle, UserCog } from "lucide-react"
 import { signOut } from "next-auth/react"
 
 import { getNavItems, type DashboardRole } from "@/components/dashboard/dashboard-nav"
 import { SiteLogo } from "@/components/layout/site-logo"
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
@@ -24,21 +23,21 @@ function getRoleConfig(role: DashboardRole) {
   switch (role) {
     case "ADMIN":
       return {
+        className: "border-amber-500/20 bg-amber-500/10 text-amber-700 dark:text-amber-400",
+        icon: ShieldCheck,
         label: "Administrator",
-        className: "bg-amber-500/10 text-amber-600 border-amber-500/20",
-        icon: ShieldCheck
       }
     case "MANAGER":
       return {
+        className: "border-sky-500/20 bg-sky-500/10 text-sky-700 dark:text-sky-400",
+        icon: UserCog,
         label: "Manager",
-        className: "bg-blue-500/10 text-blue-600 border-blue-500/20",
-        icon: UserCog
       }
     default:
       return {
+        className: "border-primary/20 bg-primary/10 text-primary dark:bg-primary/20",
+        icon: UserCircle,
         label: "Client",
-        className: "bg-primary/10 text-primary border-primary/20",
-        icon: UserCircle
       }
   }
 }
@@ -53,68 +52,91 @@ export function DashboardSidebar({
   const RoleIcon = roleConfig.icon
 
   return (
-    <div className="flex h-full flex-col bg-background/50 backdrop-blur-xl border-r border-border/40">
-      {/* --- SIDEBAR HEADER --- */}
-      <div className="flex flex-col gap-4 border-b border-border/40 px-6 py-8">
-        <div className="flex items-center justify-between">
-          <SiteLogo />
-        </div>
-        
-        <div className={cn(
-          "flex items-center gap-2.5 rounded-xl border px-3 py-2 shadow-sm backdrop-blur-md",
-          roleConfig.className
-        )}>
-          <RoleIcon className="size-4" />
-          <span className="text-xs font-bold uppercase tracking-wider">
-            {roleConfig.label}
-          </span >
+    <div className="flex h-full flex-col bg-transparent">
+      {/* Top Section with Logo */}
+      <div className="border-b border-black/5 px-6 py-7 transition-colors dark:border-white/10">
+        <SiteLogo className="[&>span:first-child]:border-white/18 [&>span:first-child]:bg-white/10 [&>span:first-child]:shadow-none" />
+
+        <div
+          className={cn(
+            "mt-6 inline-flex items-center gap-2 rounded-full border px-3.5 py-2 text-[0.65rem] font-bold uppercase tracking-[0.22em] shadow-sm",
+            roleConfig.className
+          )}
+        >
+          <RoleIcon className="size-4 shrink-0" />
+          <span>{roleConfig.label}</span>
         </div>
       </div>
 
-      {/* --- NAVIGATION --- */}
-      <nav className="flex-1 space-y-1.5 px-4 py-8 overflow-y-auto custom-scrollbar">
-        <p className="px-3 mb-4 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-muted-foreground/70">
-          Management Menu
-        </p>
-        
-        {navItems.map(({ href, icon: Icon, label }) => {
-          const active = isActivePath(pathname, href)
+      {/* Control Center Box */}
+      <div className="border-b border-black/5 px-6 py-5 transition-colors dark:border-white/10">
+        <div className="flex items-center gap-3 rounded-[1.25rem] border border-black/5 bg-black/[0.02] px-4 py-3 shadow-sm transition-colors dark:border-white/10 dark:bg-white/[0.04]">
+          <span className="inline-flex size-10 items-center justify-center rounded-full bg-primary/10 text-primary dark:bg-primary/20">
+            <LayoutDashboard className="size-4 shrink-0" />
+          </span>
+          <div className="space-y-1">
+            <p className="text-[0.65rem] font-bold uppercase tracking-[0.18em] text-slate-500 dark:text-white/50">
+              Control center
+            </p>
+            <p className="text-[0.8rem] font-bold leading-tight text-slate-900 dark:text-white">
+              Manage listings, inquiries, and account actions.
+            </p>
+          </div>
+        </div>
+      </div>
 
-          return (
-            <Link
-              key={href}
-              href={href}
-              onClick={close}
-              className={cn(
-                "group flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold transition-all duration-300",
-                active
-                  ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20 translate-x-1"
-                  : "text-muted-foreground hover:bg-secondary/80 hover:text-foreground hover:translate-x-1"
-              )}
-            >
-              <Icon className={cn(
-                "size-4.5 transition-transform duration-300 group-hover:scale-110",
-                active ? "text-primary-foreground" : "text-primary"
-              )} />
-              {label}
-            </Link>
-          )
-        })}
+      {/* Navigation Links */}
+      <nav className="flex-1 space-y-2 overflow-y-auto px-4 py-6">
+        <p className="px-3 text-[0.65rem] font-bold uppercase tracking-[0.22em] text-slate-400 dark:text-white/40">
+          Navigation
+        </p>
+
+        <div className="space-y-2 pt-3">
+          {navItems.map(({ href, icon: Icon, label }) => {
+            const active = isActivePath(pathname, href)
+
+            return (
+              <Link
+                key={href}
+                href={href}
+                onClick={close}
+                className={cn(
+                  "group flex items-center gap-3 rounded-[1.15rem] border px-3.5 py-3 text-sm font-semibold transition-all duration-300",
+                  active
+                    ? "border-black/5 bg-white text-slate-900 shadow-md dark:border-primary/20 dark:bg-primary/10 dark:text-white dark:shadow-[0_18px_40px_-28px_rgba(41,194,179,0.6)]"
+                    : "border-transparent text-slate-600 hover:bg-black/5 hover:text-slate-900 dark:text-white/70 dark:hover:border-white/10 dark:hover:bg-white/[0.04] dark:hover:text-white"
+                )}
+              >
+                <span
+                  className={cn(
+                    "inline-flex size-10 shrink-0 items-center justify-center rounded-full border transition-colors",
+                    active
+                      ? "border-black/5 bg-primary/10 text-primary dark:border-primary/20 dark:bg-primary/20"
+                      : "border-black/5 bg-white text-slate-400 shadow-sm group-hover:border-black/10 group-hover:text-primary dark:border-white/10 dark:bg-black/40 dark:text-white/40 dark:group-hover:border-white/20 dark:group-hover:text-primary"
+                  )}
+                >
+                  <Icon className="size-4 shrink-0" />
+                </span>
+                <span className="truncate">{label}</span>
+              </Link>
+            )
+          })}
+        </div>
       </nav>
 
-      {/* --- SIDEBAR FOOTER --- */}
-      <div className="mt-auto border-t border-border/40 p-4 bg-secondary/10">
+      {/* Footer Section */}
+      <div className="mt-auto border-t border-black/5 px-4 py-5 transition-colors dark:border-white/10">
         <Button
           variant="outline"
-          className="group w-full h-12 rounded-xl border-border/60 bg-background/60 font-bold shadow-sm transition-all hover:bg-destructive/10 hover:text-destructive hover:border-destructive/30 active:scale-95"
+          className="h-11 w-full rounded-[1.15rem] border-white/10 bg-white/[0.05] font-bold text-white/82 shadow-none transition-colors hover:bg-red-500/10 hover:text-red-300 dark:border-white/10 dark:bg-white/[0.05] dark:text-white/82 dark:hover:bg-red-500/10 dark:hover:text-red-300"
           onClick={() => void signOut({ callbackUrl: "/" })}
         >
-          <LogOut className="mr-2 size-4 transition-transform group-hover:-translate-x-1" />
+          <LogOut className="mr-2 size-4 shrink-0" />
           Sign Out
         </Button>
-        
-        <p className="mt-4 text-[0.65rem] text-center text-muted-foreground/60 font-medium">
-          EstatePro v2.5 Premium Access
+
+        <p className="mt-4 text-center text-[0.65rem] font-bold uppercase tracking-[0.18em] text-slate-400 dark:text-white/40">
+          EstatePro premium access
         </p>
       </div>
     </div>

@@ -18,7 +18,7 @@ export type Category = {
   description: string
   href: string
   icon: LucideIcon
-  image: string // Added image for premium UI
+  image: string
   title: string
 }
 
@@ -29,131 +29,138 @@ export type Service = {
 }
 
 export type Testimonial = {
+  avatar: string
   initials: string
   name: string
   quote: string
   role: string
-  avatar: string // Added avatar image
 }
 
 export const homeStats: Stat[] = [
-  { value: "$2.5B+", label: "Property Sales Volume" },
-  { value: "150+", label: "Verified Elite Agents" },
-  { value: "35", label: "Global Cities Covered" },
-  { value: "4.9/5", label: "Average Client Rating" },
+  { value: "$4.2B+", label: "Secured Transaction Volume" },
+  { value: "300+", label: "Exclusive Curated Properties" },
+  { value: "12", label: "Global Ultra-Prime Markets" },
+  { value: "99.8%", label: "Client Satisfaction Rate" },
 ]
 
 export const categories: Category[] = [
   {
-    title: "Luxury Apartments",
-    count: "Urban-ready homes",
+    title: "Skyline Penthouses",
+    count: "Ultra-Luxury",
     description:
-      "Smart layouts, breathtaking city views, and easy access to premium dining and business districts.",
-    href: "/explore?bedrooms=2plus",
+      "Command the city from above. Unmatched panoramic views, bespoke interior finishes, and absolute privacy at the apex of urban living.",
+    href: "/explore?bedrooms=2plus&type=penthouse",
     icon: Building2,
-    image: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop",
   },
   {
-    title: "Exclusive Villas",
-    count: "Signature listings",
+    title: "Architectural Villas",
+    count: "Signature Estates",
     description:
-      "Resort-style living with private pools, generous outdoor space, and standout privacy.",
-    href: "/explore?price=over-2m",
+      "Masterpieces of modern design. Resort-style amenities seamlessly integrated into breathtaking natural landscapes and secluded environments.",
+    href: "/explore?price=over-2m&type=villa",
     icon: Sparkles,
-    image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=2071&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=2071&auto=format&fit=crop",
   },
   {
-    title: "Premium Condos",
-    count: "Concierge-style living",
+    title: "Executive Residences",
+    count: "Turnkey Elegance",
     description:
-      "Design-forward residences for buyers who value convenience, walkability, and polished common spaces.",
-    href: "/explore?price=500k-1m",
+      "Sophisticated, low-maintenance living. Featuring white-glove concierge services, private elevators, and state-of-the-art smart home integration.",
+    href: "/explore?price=500k-1m&type=residence",
     icon: TrendingUp,
-    image: "https://images.unsplash.com/photo-1515263487990-61b07816b324?q=80&w=2070&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1515263487990-61b07816b324?q=80&w=2070&auto=format&fit=crop",
   },
   {
-    title: "Family Estates",
-    count: "Move-in ready picks",
+    title: "Heritage Manors",
+    count: "Legacy Properties",
     description:
-      "Comfortable floor plans, sprawling gardens, and neighborhoods designed for absolute everyday ease.",
-    href: "/explore?bedrooms=3plus",
+      "Timeless architecture meets contemporary comfort. Sprawling grounds, historical significance, and unparalleled craftsmanship for generations.",
+    href: "/explore?bedrooms=3plus&type=manor",
     icon: Home,
-    image: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=2070&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=2070&auto=format&fit=crop",
   },
 ]
 
 export const services: Service[] = [
   {
-    title: "Strategic Buying",
+    title: "Discreet Acquisition",
     icon: ShieldCheck,
     description:
-      "Compare neighborhoods, off-market pricing, and timing with a clear strategy before you even schedule your first tour.",
+      "Gain access to off-market inventory and highly guarded listings. We negotiate on your behalf with absolute confidentiality and precision.",
   },
   {
-    title: "Premium Selling",
+    title: "Global Portfolio Management",
     icon: TrendingUp,
     description:
-      "Position your home with cinematic presentation, data-driven pricing, and direct access to pre-qualified buyers.",
+      "Optimize your real estate assets across borders. We provide data-driven market analysis to maximize yield and portfolio valuation.",
   },
   {
-    title: "Executive Rentals",
+    title: "Private Client Concierge",
     icon: ContactRound,
     description:
-      "Find professionally vetted luxury rentals and let our concierge team handle the negotiations and paperwork.",
+      "Beyond the transaction. From bespoke interior design coordination to securing luxury short-term executive rentals, we manage the details.",
   },
 ]
 
 export const testimonials: Testimonial[] = [
   {
-    initials: "AL",
-    name: "Ariana Lopez",
-    role: "Tech Executive, San Francisco",
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1887&auto=format&fit=crop",
+    initials: "MW",
+    name: "Marcus Winslow",
+    role: "CEO, Global Equities",
+    avatar:
+      "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1887&auto=format&fit=crop",
     quote:
-      "EstatePro completely changed how I view real estate. Their AI search found exactly what I wanted in seconds, and the closing was incredibly smooth.",
+      "EstatePro redefined the acquisition process for me. Their discretion is absolute, and their ability to surface off-market architectural gems is simply unmatched in this industry.",
   },
   {
-    initials: "JM",
-    name: "James Morgan",
-    role: "Real Estate Investor, Austin",
-    avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1887&auto=format&fit=crop",
+    initials: "EC",
+    name: "Elena Croft",
+    role: "Venture Capitalist",
+    avatar:
+      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1888&auto=format&fit=crop",
     quote:
-      "The level of curation here is unmatched. I don't waste time scrolling through irrelevant listings anymore. It’s tailored, sharp, and highly professional.",
+      "The interface is as sharp as their advisory team. I don't have time for noise. EstatePro delivers curated, high-fidelity data that allows me to make fast, confident investment decisions.",
   },
   {
-    initials: "SK",
-    name: "Sara Khan",
-    role: "First-time buyer, New York",
-    avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1888&auto=format&fit=crop",
+    initials: "JD",
+    name: "Jonathan & Diana Reed",
+    role: "Private Collectors",
+    avatar:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1887&auto=format&fit=crop",
     quote:
-      "What stands out is the transparency. From pricing to neighborhood insights, I felt supported and confident making the biggest purchase of my life.",
+      "Finding a legacy estate requires more than a search bar—it requires an understanding of nuance. The level of white-glove service we received from discovery to closing was exceptional.",
   },
 ]
 
 export const faqs = [
   {
-    question: "How do I schedule a private property tour?",
+    question: "How do I gain access to private, off-market listings?",
     answer:
-      "You can start from any featured listing or use our AI search form. Once you share your preferred area, an elite advisor will coordinate a private tour at your convenience.",
+      "Off-market inventory is exclusive to our registered private clients. Once you complete our discreet onboarding process, your dedicated advisor will curate a secure portfolio of properties that align strictly with your acquisition criteria.",
   },
   {
-    question: "Are your listings verified before they go live?",
+    question: "What is the vetting process for properties listed on EstatePro?",
     answer:
-      "Absolutely. We prioritize presentation-ready inventory. Every property undergoes a rigorous 50-point inspection covering pricing alignment, legal disclosures, and physical condition.",
+      "We maintain a highly exclusive inventory. Every property is subjected to a rigorous 50-point inspection by our internal team, ensuring architectural integrity, legal clarity, and alignment with luxury market standards.",
   },
   {
-    question: "Do you offer support for international investors?",
+    question: "Do you facilitate cross-border transactions and international financing?",
     answer:
-      "Yes, we have a dedicated desk for international buyers. We handle remote video tours, cross-border financing guidance, and legal coordination to make remote purchasing seamless.",
+      "Absolutely. Our Global Desk specializes in international acquisitions, coordinating seamlessly with top-tier legal counsel, tax advisors, and private wealth institutions to ensure a frictionless remote closing.",
   },
   {
-    question: "How accurate is the AI-assisted search?",
+    question: "How does the AI-driven property curation work?",
     answer:
-      "Our natural-language AI connects directly to live market data in milliseconds. It interprets complex requests (e.g., 'Modern 4-bed near good schools under $2M') with over 98% accuracy.",
+      "Our proprietary AI analyzes live, high-fidelity market data against your specific lifestyle and investment parameters. It surfaces hidden opportunities and predicts market shifts, ensuring you only view listings with high relevance and potential.",
   },
   {
-    question: "What happens after I submit a contact request?",
+    question: "What is the next step after I request an advisory consultation?",
     answer:
-      "A senior advisor will reach out within 15 minutes during business hours. We'll confirm your priorities and outline a clear, no-pressure roadmap for your real estate goals.",
+      "A Senior Partner will contact you within 15 minutes via your preferred secure channel. This initial conversation focuses entirely on understanding your portfolio goals, with zero obligation to proceed.",
   },
 ]

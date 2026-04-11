@@ -1,153 +1,145 @@
+"use client"
+
 import Link from "next/link"
 import {
+  Building2,
   CirclePlay,
   Globe,
+  Home,
   Mail,
   MapPin,
   MessageSquare,
   Phone,
   Send,
-  Building2,
-  Home
 } from "lucide-react"
 
 import { Separator } from "@/components/ui/separator"
-import { cn } from "@/lib/utils"
 
 import { SiteLogo } from "./site-logo"
 
 const internalLinks = [
-  { label: "Home", href: "/" },
-  { label: "Explore Properties", href: "/explore" },
-  { label: "About EstatePro", href: "/about" },
-  { label: "Contact Us", href: "/contact" },
-  { label: "Privacy Policy", href: "/privacy" },
+  { href: "/", label: "Home" },
+  { href: "/explore", label: "Explore Properties" },
+  { href: "/about", label: "About EstatePro" },
+  { href: "/contact", label: "Contact Us" },
+  { href: "/privacy", label: "Privacy Policy" },
 ]
 
 const accountLinks = [
-  { label: "Create Account", href: "/register" },
-  { label: "Client Dashboard", href: "/dashboard" },
-  { label: "Sell With EstatePro", href: "/contact?intent=sell" },
-  { label: "Newest Arrivals", href: "/explore?sort=newest" },
+  { href: "/register", label: "Create Account" },
+  { href: "/dashboard", label: "Client Dashboard" },
+  { href: "/contact?intent=sell", label: "Sell With EstatePro" },
+  { href: "/explore?sort=newest", label: "Newest Arrivals" },
 ]
 
 const socialLinks = [
-  { label: "LinkedIn", href: "https://www.linkedin.com", icon: Globe },
-  { label: "Instagram", href: "https://www.instagram.com", icon: MessageSquare },
-  { label: "X", href: "https://x.com", icon: Send },
-  { label: "YouTube", href: "https://www.youtube.com", icon: CirclePlay },
+  { href: "https://www.linkedin.com", icon: Globe, label: "LinkedIn" },
+  { href: "https://www.instagram.com", icon: MessageSquare, label: "Instagram" },
+  { href: "https://x.com", icon: Send, label: "X" },
+  { href: "https://www.youtube.com", icon: CirclePlay, label: "YouTube" },
 ]
 
 function FooterLink({
+  external = false,
   href,
   label,
-  external = false,
 }: {
+  external?: boolean
   href: string
   label: string
-  external?: boolean
 }) {
   return (
     <Link
       href={href}
       target={external ? "_blank" : undefined}
       rel={external ? "noreferrer" : undefined}
-      className="group flex items-center text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+      className="group inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
     >
-      <span className="relative flex items-center">
-        <span className="absolute -left-3 opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:left-0 text-primary">
-          ›
-        </span>
-        <span className="transition-transform duration-300 group-hover:translate-x-3">
-          {label}
-        </span>
+      <span className="text-primary/70 transition-transform duration-200 group-hover:translate-x-0.5">
+        {">"}
       </span>
+      <span>{label}</span>
     </Link>
   )
 }
 
 export function SiteFooter() {
   return (
-    <footer className="relative border-t border-border/30 bg-background overflow-hidden">
-      {/* Decorative subtle background gradient */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent to-primary/5 dark:to-primary/10" />
-
-      <div className="relative mx-auto flex w-full max-w-7xl flex-col gap-16 px-4 py-16 sm:px-6 lg:px-8">
-        
-        {/* Main Footer Content */}
-        <div className="grid gap-12 lg:grid-cols-[1.2fr_repeat(3,minmax(0,1fr))]">
-          
-          {/* Brand Column */}
+    <footer className="mt-14 border-t border-black/5 bg-white/60 shadow-[0_-26px_90px_-54px_rgba(15,23,42,0.15)] backdrop-blur-2xl transition-colors duration-500 dark:border-white/10 dark:bg-black/40 dark:shadow-[0_-26px_90px_-54px_rgba(0,0,0,0.8)]">
+      <div className="mx-auto w-full max-w-[1400px] px-4 sm:px-6 lg:px-8">
+        <div className="grid gap-12 py-10 sm:py-12 lg:grid-cols-[1.2fr_repeat(3,minmax(0,1fr))]">
           <div className="space-y-6">
             <SiteLogo />
-            <p className="max-w-xs text-sm leading-relaxed text-muted-foreground">
-              Elevating the standard of property discovery. We provide verified inventory, faster responses, and a premium real estate experience.
+            <p className="max-w-sm text-sm leading-7 text-muted-foreground">
+              Elevating the standard of property discovery with verified inventory,
+              faster responses, and a premium real estate experience built for clarity.
             </p>
 
-            <div className="rounded-2xl border border-border/50 bg-secondary/30 p-6 backdrop-blur-sm shadow-sm transition-all hover:border-primary/30 hover:shadow-md">
-              <p className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-foreground mb-4">
-                <span className="flex size-2 rounded-full bg-primary" />
+            <div className="rounded-[1.5rem] border border-black/5 bg-black/[0.03] p-5 transition-colors dark:border-white/10 dark:bg-white/[0.04]">
+              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-muted-foreground">
                 Contact Office
               </p>
-              <div className="space-y-4 text-sm font-medium text-muted-foreground">
+              <div className="space-y-4 text-sm text-muted-foreground">
                 <a
                   href="https://maps.google.com/?q=1450+Harbor+Avenue+Suite+320+San+Diego+CA+92101"
                   target="_blank"
                   rel="noreferrer"
-                  className="group flex items-start gap-3 transition-colors hover:text-foreground"
+                  className="flex items-start gap-3 transition-colors hover:text-foreground"
                 >
-                  <MapPin className="mt-0.5 size-4 shrink-0 text-primary transition-transform group-hover:-translate-y-0.5" />
-                  <span>1450 Harbor Avenue, Suite 320<br />San Diego, CA 92101</span>
+                  <MapPin className="mt-0.5 size-4 shrink-0 text-primary" />
+                  <span>
+                    1450 Harbor Avenue, Suite 320
+                    <br />
+                    San Diego, CA 92101
+                  </span>
                 </a>
                 <a
                   href="mailto:hello@estatepro.com"
-                  className="group flex items-center gap-3 transition-colors hover:text-foreground"
+                  className="flex items-center gap-3 transition-colors hover:text-foreground"
                 >
-                  <Mail className="size-4 shrink-0 text-primary transition-transform group-hover:scale-110" />
-                  hello@estatepro.com
+                  <Mail className="size-4 shrink-0 text-primary" />
+                  <span>hello@estatepro.com</span>
                 </a>
                 <a
                   href="tel:+14155550148"
-                  className="group flex items-center gap-3 transition-colors hover:text-foreground"
+                  className="flex items-center gap-3 transition-colors hover:text-foreground"
                 >
-                  <Phone className="size-4 shrink-0 text-primary transition-transform group-hover:rotate-12" />
-                  +1 (415) 555-0148
+                  <Phone className="size-4 shrink-0 text-primary" />
+                  <span>+1 (415) 555-0148</span>
                 </a>
               </div>
             </div>
           </div>
 
-          {/* Nav Links Column */}
-          <div className="space-y-6 lg:pl-8">
-            <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-foreground">
+          <div className="space-y-5">
+            <h2 className="text-xs font-semibold uppercase tracking-[0.22em] text-muted-foreground">
               Navigation
             </h2>
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-3">
               {internalLinks.map((link) => (
                 <FooterLink key={link.label} {...link} />
               ))}
             </div>
           </div>
 
-          {/* Account Links Column */}
-          <div className="space-y-6">
-            <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-foreground">
+          <div className="space-y-5">
+            <h2 className="text-xs font-semibold uppercase tracking-[0.22em] text-muted-foreground">
               Client Portal
             </h2>
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-3">
               {accountLinks.map((link) => (
                 <FooterLink key={link.label} {...link} />
               ))}
             </div>
           </div>
 
-          {/* Social & Hours Column */}
-          <div className="space-y-6">
-            <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-foreground">
+          <div className="space-y-5">
+            <h2 className="text-xs font-semibold uppercase tracking-[0.22em] text-muted-foreground">
               Connect With Us
             </h2>
-            <p className="text-sm leading-relaxed text-muted-foreground">
-              Follow for exclusive off-market updates, design inspiration, and market insights.
+            <p className="text-sm leading-7 text-muted-foreground">
+              Follow for exclusive off-market updates, design inspiration, and market
+              insight.
             </p>
             <div className="flex flex-wrap gap-3">
               {socialLinks.map(({ href, icon: Icon, label }) => (
@@ -157,40 +149,39 @@ export function SiteFooter() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label={label}
-                  className="group inline-flex size-11 items-center justify-center rounded-xl border border-border/60 bg-background text-muted-foreground shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:bg-primary/5 hover:text-primary hover:shadow-md"
+                  className="inline-flex size-11 items-center justify-center rounded-2xl border border-black/5 bg-black/[0.03] text-muted-foreground transition-all duration-200 hover:-translate-y-0.5 hover:border-black/20 hover:text-primary dark:border-white/10 dark:bg-white/[0.04] dark:hover:border-primary/20 dark:hover:text-primary"
                 >
-                  <Icon className="size-4 transition-transform group-hover:scale-110" />
+                  <Icon className="size-4 shrink-0" />
                 </Link>
               ))}
             </div>
-            
-            <Separator className="my-6 border-border/40" />
-            
-            <div className="space-y-3 rounded-xl bg-secondary/20 p-4">
-              <p className="text-xs font-bold uppercase tracking-wider text-foreground">Office Hours</p>
-              <div className="space-y-1 text-sm font-medium text-muted-foreground">
-                <p>Mon - Fri: 8:00 AM – 6:00 PM</p>
-                <p>Sat - Sun: 10:00 AM – 3:00 PM</p>
+
+            <Separator className="bg-black/10 dark:bg-white/10" />
+
+            <div className="rounded-[1.35rem] border border-black/5 bg-black/[0.03] p-4 transition-colors dark:border-white/10 dark:bg-white/[0.04]">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+                Office Hours
+              </p>
+              <div className="mt-3 space-y-1 text-sm text-muted-foreground">
+                <p>Mon - Fri: 8:00 AM - 6:00 PM</p>
+                <p>Sat - Sun: 10:00 AM - 3:00 PM</p>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="mt-8 flex flex-col gap-6 pt-8 border-t border-border/40 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-4 border-t border-black/10 py-6 text-sm text-muted-foreground transition-colors dark:border-white/10 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-2">
-            <Home className="size-4 text-muted-foreground" />
-            <p className="text-sm font-medium text-muted-foreground">
-              © {new Date().getFullYear()} EstatePro Luxury Real Estate. All rights reserved.
-            </p>
+            <Home className="size-4 shrink-0 text-primary" />
+            <p>Copyright {new Date().getFullYear()} EstatePro Luxury Real Estate.</p>
           </div>
           <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-6">
-            <Link href="/privacy" className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
+            <Link href="/privacy" className="transition-colors hover:text-foreground">
               Privacy & Legal
             </Link>
-            <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
-              <Building2 className="size-4" />
-              Equal Housing Opportunity
+            <div className="flex items-center gap-2">
+              <Building2 className="size-4 shrink-0" />
+              <span>Equal Housing Opportunity</span>
             </div>
           </div>
         </div>

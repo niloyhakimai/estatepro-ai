@@ -14,7 +14,7 @@ export function AppProviders({
 }) {
   return (
     <SessionProvider session={session} refetchOnWindowFocus={false}>
-      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+      <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
         {children}
       </ThemeProvider>
     </SessionProvider>

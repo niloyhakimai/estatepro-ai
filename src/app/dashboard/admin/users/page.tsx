@@ -1,4 +1,5 @@
-﻿import { Search, Users, UserCheck, ShieldAlert, Fingerprint, Mail, Calendar } from "lucide-react"
+﻿import Link from "next/link"
+import { Search, Users, UserCheck, ShieldAlert, Fingerprint, Mail, Calendar } from "lucide-react"
 
 import { DashboardEmptyState } from "@/components/dashboard/dashboard-empty-state"
 import { PaginationControls } from "@/components/dashboard/pagination-controls"
@@ -31,11 +32,11 @@ function getStringParam(value: string | string[] | undefined) {
 function getRoleBadgeStyles(role: "ADMIN" | "MANAGER" | "USER") {
   switch (role) {
     case "ADMIN":
-      return "bg-amber-500/10 text-amber-600 border-amber-500/20 shadow-none"
+      return "bg-amber-500/10 text-amber-600 border-amber-500/20 dark:text-amber-400"
     case "MANAGER":
-      return "bg-blue-500/10 text-blue-600 border-blue-500/20 shadow-none"
+      return "bg-blue-500/10 text-blue-600 border-blue-500/20 dark:text-blue-400"
     default:
-      return "bg-emerald-500/10 text-emerald-600 border-emerald-500/20 shadow-none"
+      return "bg-emerald-500/10 text-emerald-600 border-emerald-500/20 dark:text-emerald-400"
   }
 }
 
@@ -82,38 +83,41 @@ export default async function AdminUsersPage({
 
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
-      <Card className="border-border/40 bg-background/60 backdrop-blur-xl rounded-[2.5rem] overflow-hidden shadow-2xl">
-        <CardHeader className="p-8 sm:p-10 border-b border-border/30 bg-secondary/5">
+      <Card className="overflow-hidden rounded-[2.5rem] border border-black/5 bg-white/60 shadow-[0_30px_100px_-58px_rgba(15,23,42,0.15)] backdrop-blur-xl transition-colors duration-500 dark:border-white/10 dark:bg-black/40 dark:shadow-[0_30px_100px_-58px_rgba(0,0,0,0.8)]">
+        <CardHeader className="border-b border-black/5 bg-black/[0.02] p-8 transition-colors dark:border-white/10 dark:bg-white/[0.02] sm:p-10">
           <div className="space-y-4">
-            <Badge variant="outline" className="bg-primary/5 text-primary border-primary/20 px-3 py-1">
+            <Badge variant="secondary" className="bg-primary/10 px-3 py-1.5 text-[0.65rem] uppercase tracking-[0.2em] text-primary shadow-sm dark:bg-primary/20">
               Member Directory
             </Badge>
-            <CardTitle className="text-3xl font-bold tracking-tight">Manage community access</CardTitle>
-            <p className="max-w-2xl text-base text-muted-foreground font-medium leading-relaxed">
+            <CardTitle className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Manage community access</CardTitle>
+            <p className="max-w-2xl text-base font-medium leading-relaxed text-slate-600 dark:text-white/70">
               Review registered members, adjust administrative privileges, and monitor platform engagement across the network.
             </p>
           </div>
         </CardHeader>
 
-        <CardContent className="p-8 sm:p-10 space-y-8">
+        <CardContent className="space-y-8 p-8 sm:p-10">
           {/* Advanced Search Area */}
           <form action="/dashboard/admin/users" className="flex flex-col gap-4 sm:flex-row items-center">
-            <div className="relative flex-1 group w-full">
-              <Search className="pointer-events-none absolute top-1/2 left-4 size-4 -translate-y-1/2 text-muted-foreground group-focus-within:text-primary transition-colors" />
+            <div className="group relative w-full flex-1">
+              <Search className="pointer-events-none absolute left-4 top-1/2 size-4 -translate-y-1/2 text-slate-400 transition-colors group-focus-within:text-primary dark:text-white/40" />
               <Input
                 name="query"
                 defaultValue={query}
                 placeholder="Search by full name or email address..."
-                className="pl-11 h-12 rounded-xl bg-background/50 border-border/60 transition-all focus:bg-background focus:ring-2 focus:ring-primary/20"
+                className="h-12 rounded-[1.15rem] border-black/10 bg-white/50 pl-11 text-slate-900 placeholder:text-slate-400 shadow-inner transition-all focus-visible:border-black/20 focus-visible:bg-white focus-visible:ring-black/10 dark:border-white/10 dark:bg-black/20 dark:text-white dark:placeholder:text-white/30 dark:focus-visible:border-white/20 dark:focus-visible:bg-black/40 dark:focus-visible:ring-white/10"
               />
             </div>
-            <Button type="submit" variant="secondary" className="h-12 px-8 rounded-xl font-bold border-border/60 bg-secondary/50 backdrop-blur-sm transition-all hover:bg-secondary">
+            <Button 
+              type="submit" 
+              className="h-12 rounded-[1.15rem] px-8 font-bold bg-slate-900 text-white shadow-md transition-all hover:bg-slate-800 dark:bg-[#b8f579] dark:text-black dark:shadow-[0_14px_34px_-20px_rgba(184,245,121,0.95)] dark:hover:bg-[#a6e55d]"
+            >
               Search Accounts
             </Button>
           </form>
 
           {users.length === 0 ? (
-            <div className="py-20 border-2 border-dashed border-border/40 rounded-[2rem]">
+            <div className="rounded-[2rem] border-2 border-dashed border-black/10 py-20 dark:border-white/10">
               <DashboardEmptyState
                 icon={Users}
                 title="No members found"
@@ -122,29 +126,33 @@ export default async function AdminUsersPage({
             </div>
           ) : (
             <div className="space-y-6">
-              <div className="rounded-2xl border border-border/40 bg-background/40 overflow-hidden backdrop-blur-md shadow-sm">
+              <div className="overflow-hidden rounded-[1.5rem] border border-black/5 bg-white/40 shadow-sm backdrop-blur-md transition-colors dark:border-white/10 dark:bg-black/20">
                 <Table>
-                  <TableHeader className="bg-secondary/20">
-                    <TableRow className="hover:bg-transparent border-border/40">
-                      <TableHead className="py-5 pl-6 font-bold text-foreground">Member Profile</TableHead>
-                      <TableHead className="font-bold text-foreground">Account Role</TableHead>
-                      <TableHead className="text-center font-bold text-foreground">Activity</TableHead>
-                      <TableHead className="font-bold text-foreground text-right pr-6">Join Date</TableHead>
+                  <TableHeader className="bg-black/[0.03] dark:bg-white/[0.03]">
+                    <TableRow className="border-black/5 hover:bg-transparent dark:border-white/10">
+                      <TableHead className="py-5 pl-6 font-bold text-slate-900 dark:text-white">Member Profile</TableHead>
+                      <TableHead className="font-bold text-slate-900 dark:text-white">Account Role</TableHead>
+                      <TableHead className="text-center font-bold text-slate-900 dark:text-white">Activity</TableHead>
+                      <TableHead className="pr-6 text-right font-bold text-slate-900 dark:text-white">Join Date</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
                     {users.map((user) => (
-                      <TableRow key={user.id} className="group border-border/30 hover:bg-primary/5 transition-colors">
+                      <TableRow key={user.id} className="group border-black/5 transition-colors hover:bg-black/[0.02] dark:border-white/10 dark:hover:bg-white/[0.02]">
                         <TableCell className="py-6 pl-6">
                           <div className="flex items-center gap-4">
-                            <div className="flex size-11 items-center justify-center rounded-2xl bg-secondary/50 border border-border/60 font-bold text-primary shadow-sm group-hover:bg-background transition-colors">
-                              {user.name ? user.name.charAt(0).toUpperCase() : <Fingerprint className="size-5" />}
+                            <div className="flex size-11 items-center justify-center rounded-2xl border border-black/5 bg-black/5 text-primary shadow-sm transition-colors group-hover:bg-white dark:border-white/10 dark:bg-white/5 dark:group-hover:bg-black/40">
+                              {user.name ? (
+                                <span className="font-bold">{user.name.charAt(0).toUpperCase()}</span>
+                              ) : (
+                                <Fingerprint className="size-5" />
+                              )}
                             </div>
                             <div className="flex flex-col">
-                              <span className="font-bold text-foreground leading-tight">
+                              <span className="font-bold leading-tight text-slate-900 dark:text-white">
                                 {user.name ?? "EstatePro Member"}
                               </span>
-                              <span className="flex items-center gap-1.5 text-xs text-muted-foreground font-medium mt-1">
+                              <span className="mt-1 flex items-center gap-1.5 text-xs font-medium text-slate-500 dark:text-white/60">
                                 <Mail className="size-3 text-primary/60" />
                                 {user.email ?? "Private Account"}
                               </span>
@@ -152,10 +160,12 @@ export default async function AdminUsersPage({
                           </div>
                         </TableCell>
                         <TableCell>
-                          <Badge className={cn(
-                            "px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border",
-                            getRoleBadgeStyles(user.role)
-                          )}>
+                          <Badge 
+                            className={cn(
+                              "px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest border shadow-none",
+                              getRoleBadgeStyles(user.role)
+                            )}
+                          >
                             {user.role === "ADMIN" && <ShieldAlert className="mr-1.5 size-3" />}
                             {user.role === "MANAGER" && <UserCheck className="mr-1.5 size-3" />}
                             {user.role}
@@ -164,19 +174,19 @@ export default async function AdminUsersPage({
                         <TableCell>
                           <div className="flex items-center justify-center gap-4">
                             <div className="text-center">
-                              <p className="text-sm font-black text-foreground">{user._count.inquiries}</p>
-                              <p className="text-[10px] uppercase font-bold text-muted-foreground">Inquiries</p>
+                              <p className="text-sm font-black text-slate-900 dark:text-white">{user._count.inquiries}</p>
+                              <p className="text-[10px] font-bold uppercase text-slate-500 dark:text-white/50">Inquiries</p>
                             </div>
-                            <div className="w-px h-6 bg-border/40" />
+                            <div className="h-6 w-px bg-black/10 dark:bg-white/10" />
                             <div className="text-center">
-                              <p className="text-sm font-black text-foreground">{user._count.properties}</p>
-                              <p className="text-[10px] uppercase font-bold text-muted-foreground">Props</p>
+                              <p className="text-sm font-black text-slate-900 dark:text-white">{user._count.properties}</p>
+                              <p className="text-[10px] font-bold uppercase text-slate-500 dark:text-white/50">Props</p>
                             </div>
                           </div>
                         </TableCell>
-                        <TableCell className="text-right pr-6">
+                        <TableCell className="pr-6 text-right">
                           <div className="flex flex-col items-end gap-1">
-                            <div className="flex items-center gap-1.5 text-xs font-bold text-foreground">
+                            <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900 dark:text-white">
                               <Calendar className="size-3 text-primary" />
                               {user.createdAt.toLocaleDateString("en-US", {
                                 month: "short",
@@ -193,8 +203,8 @@ export default async function AdminUsersPage({
               </div>
 
               <div className="flex items-center justify-between px-2">
-                <p className="text-sm font-medium text-muted-foreground">
-                  Overseeing <span className="text-foreground font-bold">{users.length}</span> active member profiles.
+                <p className="text-sm font-medium text-slate-600 dark:text-white/70">
+                  Overseeing <span className="font-bold text-slate-900 dark:text-white">{users.length}</span> active member profiles.
                 </p>
                 <PaginationControls
                   pathname="/dashboard/admin/users"

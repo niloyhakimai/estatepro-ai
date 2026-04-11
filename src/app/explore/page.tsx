@@ -1,4 +1,4 @@
-import { MapPin, Search, CheckCircle2 } from "lucide-react"
+import { MapPin, Search } from "lucide-react"
 
 import { AiSearchForm } from "@/components/ai/ai-search-form"
 import { ExploreEmptyState } from "@/components/explore/explore-empty-state"
@@ -13,9 +13,14 @@ import {
 import { PropertyCard } from "@/components/explore/property-card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Select } from "@/components/ui/select"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import { prisma } from "@/lib/prisma"
-import { cn } from "@/lib/utils"
 
 const PAGE_SIZE = 8
 
@@ -64,61 +69,96 @@ export default async function ExplorePage({ searchParams }: ExplorePageProps) {
   const rangeEnd = totalCount === 0 ? 0 : rangeStart + properties.length - 1
 
   return (
-    <section className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16 animate-in fade-in duration-500">
-      <div className="space-y-12">
-        
-        {/* --- TOP HERO PANE (CLEAN, NO IMAGE) --- */}
-        <div className="rounded-[3rem] border border-border/30 bg-background/60 backdrop-blur-xl p-10 sm:p-14 shadow-2xl space-y-10">
-          <div className="space-y-4">
-            <Badge variant="accent" className="bg-primary/10 text-primary border-primary/20 py-1.5 px-4 shadow-sm">Explore Exclusive Listings</Badge>
-            <div className="grid gap-10 lg:grid-cols-[1fr_24rem] lg:items-center">
+    <section className="w-full animate-in fade-in duration-500">
+      
+      {/* --- FULL WIDTH HEADER SECTION --- */}
+      <div className="w-full border-b border-black/5 bg-white/60 shadow-[0_30px_100px_-58px_rgba(15,23,42,0.15)] backdrop-blur-xl transition-colors duration-500 dark:border-white/10 dark:bg-black/40 dark:shadow-[0_30px_100px_-58px_rgba(0,0,0,0.8)]">
+        <div className="mx-auto w-full max-w-[1400px] px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_21rem] lg:items-center">
+            <div className="space-y-5">
+              <Badge variant="secondary" className="bg-primary/10 text-[0.65rem] uppercase tracking-[0.2em] text-primary dark:bg-primary/20">
+                Explore exclusive listings
+              </Badge>
+
               <div className="space-y-4">
-                <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl leading-tight">
-                  Browse modern real estate <span className="text-primary">faster</span> and cleaner.
+                <p className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-slate-500 dark:text-white/60">
+                  Verified inventory. Sharper filtering. Premium continuity.
+                </p>
+                <h1 className="text-4xl font-semibold tracking-tight text-slate-900 dark:text-white sm:text-5xl lg:text-[3.85rem] lg:leading-[1.04]">
+                  Browse modern real estate with a focused search flow.
                 </h1>
-                <p className="max-w-3xl text-lg leading-relaxed text-muted-foreground sm:text-xl">
-                  Search our verified, elite inventory by location, price, and bedrooms. EstatePro keeps your search streamlined, transparent, and effortlessly shareable through URL-based filters.
+                <p className="max-w-3xl text-base leading-8 text-slate-600 dark:text-white/70 sm:text-lg">
+                  Search verified inventory by location, price, and bedrooms. Every
+                  filter stays reflected in the URL so results remain easy to share,
+                  revisit, and refine.
                 </p>
               </div>
 
-              {/* LIVE RESULTS BOX - PREMIUMcontained style */}
-              <div className="shrink-0 rounded-[2rem] border border-border/40 bg-background/80 p-8 shadow-xl backdrop-blur-md transition-all hover:shadow-2xl hover:border-primary/20">
-                <p className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-primary">
-                  <span className="relative flex size-2.5">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                    <span className="relative inline-flex rounded-full size-2.5 bg-primary"></span>
-                  </span>
-                  LIVE INVENTORY STATUS
-                </p>
-                <p className="mt-3 text-5xl font-extrabold text-foreground drop-shadow-sm">
-                  {totalCount}
-                </p>
-                <p className="mt-3 flex items-center gap-2.5 text-base font-medium text-muted-foreground">
-                  <MapPin className="size-5 text-primary" />
-                  Matching verified listings
-                </p>
+              <div className="rounded-[1.9rem] border border-black/5 bg-black/5 p-2 backdrop-blur-xl transition-colors dark:border-white/10 dark:bg-white/[0.05]">
+                <AiSearchForm
+                  compact
+                  className="border-none bg-transparent shadow-none"
+                  description="Pro tip: type 'Find me a cheap 3-bedroom place in Austin' and let the AI configure the filters."
+                />
+              </div>
+            </div>
+
+            {/* Stats Box */}
+            <div className="rounded-[2rem] border border-black/5 bg-white/40 p-6 shadow-sm backdrop-blur-xl transition-colors dark:border-white/10 dark:bg-white/[0.02] dark:shadow-2xl">
+              <p className="flex items-center gap-2 text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-primary">
+                <span className="relative flex size-2.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
+                  <span className="relative inline-flex size-2.5 rounded-full bg-primary" />
+                </span>
+                Live inventory
+              </p>
+              <p className="mt-4 text-5xl font-semibold tracking-tight text-slate-900 dark:text-white">
+                {totalCount}
+              </p>
+              <p className="mt-4 flex items-center gap-2.5 text-sm text-slate-600 dark:text-white/70">
+                <MapPin className="size-4 shrink-0 text-primary" />
+                Matching verified listings
+              </p>
+
+              <div className="mt-6 space-y-3">
+                <div className="rounded-[1.15rem] border border-black/5 bg-black/[0.03] px-4 py-3 transition-colors dark:border-white/5 dark:bg-black/40">
+                  <p className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-slate-500 dark:text-white/50">
+                    Current range
+                  </p>
+                  <p className="mt-2 text-sm font-medium text-slate-900 dark:text-white">
+                    Showing {rangeStart}-{rangeEnd} of {totalCount}
+                  </p>
+                </div>
+                <div className="rounded-[1.15rem] border border-black/5 bg-black/[0.03] px-4 py-3 transition-colors dark:border-white/5 dark:bg-black/40">
+                  <p className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-slate-500 dark:text-white/50">
+                    Sort mode
+                  </p>
+                  <p className="mt-2 text-sm font-medium text-slate-900 dark:text-white">
+                    {sortOptions.find((option) => option.value === filters.sort)?.label ??
+                      "Newest first"}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
-
-          <div className="rounded-3xl bg-background/40 border border-border/40 p-2 backdrop-blur-md shadow-inner mt-4">
-            <AiSearchForm
-              compact
-              className="bg-card shadow-none border-none"
-              description="✨ Pro Tip: Type 'Find me a cheap 3-bedroom place in Austin' and our AI will configure the Explore filters instantly."
-            />
-          </div>
         </div>
+      </div>
+      {/* --- END FULL WIDTH HEADER --- */}
 
-        {/* --- MAIN EXPLORE AREA --- */}
-        <div className="grid gap-8 xl:grid-cols-[20rem_minmax(0,1fr)] items-start pt-6">
+      {/* Main Content Grid (Filters & Results) */}
+      <div className="mx-auto w-full max-w-[1400px] px-4 py-10 sm:px-6 lg:px-8 lg:py-12">
+        <div className="grid items-start gap-8 xl:grid-cols-[20rem_minmax(0,1fr)]">
           <ExploreFiltersPanel filters={filters} totalCount={totalCount} />
 
           <div className="space-y-6">
-            <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between rounded-3xl border border-border/40 bg-secondary/30 p-6 shadow-sm">
-              <div className="flex items-center gap-3 rounded-2xl bg-background/60 px-5 py-3.5 text-sm font-medium text-muted-foreground backdrop-blur-sm border border-border/50">
-                <Search className="size-5 text-primary" />
-                Live Results: URL-based filters stay shareable and bookmarked.
+            
+            {/* Sort Bar */}
+            <div className="flex flex-col gap-4 rounded-[1.9rem] border border-black/5 bg-white/60 p-5 shadow-sm backdrop-blur-xl transition-colors duration-500 dark:border-white/10 dark:bg-black/40 dark:shadow-xl lg:flex-row lg:items-center lg:justify-between sm:p-6">
+              <div className="flex items-center gap-3 rounded-full border border-black/5 bg-black/5 px-4 py-3 text-sm text-slate-600 transition-colors dark:border-white/10 dark:bg-white/[0.05] dark:text-white/70">
+                <span className="inline-flex size-9 items-center justify-center rounded-full bg-primary/10 text-primary dark:bg-primary/20">
+                  <Search className="size-4 shrink-0" />
+                </span>
+                URL-based filters stay shareable and easy to revisit.
               </div>
 
               <form action="/explore" className="flex flex-col gap-3 sm:flex-row">
@@ -128,16 +168,22 @@ export default async function ExplorePage({ searchParams }: ExplorePageProps) {
                 <Select
                   name="sort"
                   defaultValue={filters.sort}
-                  className="min-w-[16rem] h-12 rounded-xl bg-background/60 border-border/60"
-                  aria-label="Sort properties"
                 >
-                  {sortOptions.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
+                  <SelectTrigger
+                    aria-label="Sort properties"
+                    className="h-12 min-w-[16rem] rounded-[1rem] bg-white dark:bg-transparent"
+                  >
+                    <SelectValue placeholder="Sort properties" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {sortOptions.map((option) => (
+                      <SelectItem key={option.value} value={option.value}>
+                        {option.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
                 </Select>
-                <Button type="submit" variant="default" className="rounded-xl h-12 text-base h-font-bold shadow-md transition-all hover:shadow-lg hover:-translate-y-0.5">
+                <Button type="submit" className="h-12 rounded-[1rem] px-5 font-semibold bg-slate-900 text-white hover:bg-slate-800 dark:bg-[#b8f579] dark:text-black dark:shadow-[0_14px_34px_-20px_rgba(184,245,121,0.95)] dark:hover:bg-[#a6e55d]">
                   Sort results
                 </Button>
               </form>
@@ -146,11 +192,19 @@ export default async function ExplorePage({ searchParams }: ExplorePageProps) {
             {properties.length === 0 ? (
               <ExploreEmptyState />
             ) : (
-              <div className="space-y-10 pt-4">
-                <div className="inline-block rounded-2xl border border-border/40 bg-background/60 px-6 py-3.5 text-base font-medium text-muted-foreground backdrop-blur-sm">
-                  Showing <span className="text-foreground font-bold">{rangeStart}-{rangeEnd}</span> of <span className="text-foreground font-bold">{totalCount}</span> luxury matching properties.
+              <div className="space-y-8">
+                
+                {/* Result Info Pill */}
+                <div className="inline-flex items-center gap-3 rounded-full border border-black/5 bg-white/60 px-5 py-3 text-sm text-slate-600 backdrop-blur-xl transition-colors dark:border-white/10 dark:bg-white/[0.05] dark:text-white/70">
+                  <span className="inline-flex size-8 items-center justify-center rounded-full bg-primary/10 text-primary dark:bg-primary/20">
+                    <MapPin className="size-4 shrink-0" />
+                  </span>
+                  Showing <span className="font-semibold text-slate-900 dark:text-white">{rangeStart}-{rangeEnd}</span> of{" "}
+                  <span className="font-semibold text-slate-900 dark:text-white">{totalCount}</span> matching
+                  properties
                 </div>
 
+                {/* Properties Grid */}
                 <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                   {properties.map((property) => (
                     <PropertyCard key={property.id} property={property} />

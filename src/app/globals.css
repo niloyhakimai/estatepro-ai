@@ -3,27 +3,27 @@
 
 :root {
   color-scheme: light;
-  --background: #f6f4ee;
-  --foreground: #18232d;
-  --card: #fffcf7;
-  --card-foreground: #18232d;
-  --popover: #fffdf9;
-  --popover-foreground: #18232d;
-  --primary: #0f766e;
-  --primary-foreground: #f4fffc;
-  --secondary: #e6dfd3;
-  --secondary-foreground: #21313d;
-  --muted: #ece7de;
-  --muted-foreground: #5f6d79;
-  --accent: #c89443;
-  --accent-foreground: #fff8ef;
+  --background: #edf2f6;
+  --foreground: #101924;
+  --card: #f8fbfd;
+  --card-foreground: #101924;
+  --popover: #f8fbfd;
+  --popover-foreground: #101924;
+  --primary: #159f95;
+  --primary-foreground: #f3fffd;
+  --secondary: #dde7ee;
+  --secondary-foreground: #1c2b38;
+  --muted: #e4ebf1;
+  --muted-foreground: #607181;
+  --accent: #c79953;
+  --accent-foreground: #1b1305;
   --destructive: #b42318;
-  --border: #d9d3c8;
-  --input: #e5ddd1;
-  --ring: #0f766e;
-  --selection: rgba(15, 118, 110, 0.2);
-  --glow-primary: rgba(15, 118, 110, 0.14);
-  --glow-accent: rgba(200, 148, 67, 0.14);
+  --border: #d2dde6;
+  --input: #dce7ef;
+  --ring: #159f95;
+  --selection: rgba(21, 159, 149, 0.2);
+  --glow-primary: rgba(21, 159, 149, 0.12);
+  --glow-accent: rgba(199, 153, 83, 0.12);
   --font-sans-stack:
     "Segoe UI Variable Text", "Segoe UI", "SF Pro Display", -apple-system,
     BlinkMacSystemFont, system-ui, sans-serif;
@@ -33,27 +33,27 @@
 
 .dark {
   color-scheme: dark;
-  --background: #0d1417;
-  --foreground: #f3f7f4;
-  --card: #122026;
-  --card-foreground: #f3f7f4;
-  --popover: #122026;
-  --popover-foreground: #f3f7f4;
-  --primary: #25b1a6;
-  --primary-foreground: #061412;
-  --secondary: #1b2830;
-  --secondary-foreground: #ecf3ef;
-  --muted: #162229;
-  --muted-foreground: #95a6b3;
-  --accent: #d3a65c;
-  --accent-foreground: #171104;
+  --background: #0a0f16;
+  --foreground: #edf5ff;
+  --card: #101922;
+  --card-foreground: #edf5ff;
+  --popover: #0e1720;
+  --popover-foreground: #edf5ff;
+  --primary: #29c2b3;
+  --primary-foreground: #04110f;
+  --secondary: #121d28;
+  --secondary-foreground: #edf5ff;
+  --muted: #16212d;
+  --muted-foreground: #8ea2b5;
+  --accent: #d7ab63;
+  --accent-foreground: #1a1204;
   --destructive: #ff7567;
-  --border: #22313a;
-  --input: #1b2830;
-  --ring: #25b1a6;
-  --selection: rgba(37, 177, 166, 0.24);
-  --glow-primary: rgba(37, 177, 166, 0.18);
-  --glow-accent: rgba(211, 166, 92, 0.12);
+  --border: #223140;
+  --input: #18222d;
+  --ring: #29c2b3;
+  --selection: rgba(41, 194, 179, 0.24);
+  --glow-primary: rgba(41, 194, 179, 0.18);
+  --glow-accent: rgba(215, 171, 99, 0.12);
 }
 
 @theme inline {
@@ -96,8 +96,9 @@ body {
   min-height: 100%;
   background-color: var(--background);
   background-image:
-    radial-gradient(circle at top left, var(--glow-primary), transparent 34%),
-    radial-gradient(circle at 80% 14%, var(--glow-accent), transparent 28%);
+    radial-gradient(circle at top left, var(--glow-primary), transparent 32%),
+    radial-gradient(circle at 82% 12%, var(--glow-accent), transparent 26%),
+    linear-gradient(180deg, color-mix(in srgb, var(--background) 96%, black 4%), var(--background));
   background-attachment: fixed;
   color: var(--foreground);
   font-family: var(--font-sans-stack);

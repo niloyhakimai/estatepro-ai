@@ -16,7 +16,7 @@ type GoogleAuthButtonProps = {
 
 function GoogleMark() {
   return (
-    <svg aria-hidden="true" className="size-4" viewBox="0 0 24 24">
+    <svg aria-hidden="true" className="mr-2 size-5" viewBox="0 0 24 24">
       <path
         d="M21.805 12.23c0-.78-.064-1.35-.202-1.94H12.2v3.56h5.52c-.111.885-.71 2.218-2.043 3.114l-.019.119 2.847 2.206.197.02c1.812-1.674 2.858-4.135 2.858-7.079Z"
         fill="#4285F4"
@@ -59,9 +59,8 @@ export function GoogleAuthButton({
     <Button
       type="button"
       variant="outline"
-      size="lg"
       className={cn(
-        "w-full rounded-2xl border-border/70 bg-background/85 text-foreground hover:bg-background",
+        "flex h-12 w-full items-center justify-center rounded-[1.15rem] border border-black/10 bg-white/80 px-8 font-bold text-slate-700 shadow-sm backdrop-blur-md transition-all hover:-translate-y-0.5 hover:bg-white hover:shadow-md dark:border-white/10 dark:bg-black/20 dark:text-white dark:hover:bg-black/40",
         className
       )}
       disabled={disabled || isPending}
@@ -71,8 +70,8 @@ export function GoogleAuthButton({
     >
       {isPending ? (
         <>
-          <LoaderCircle className="size-4 animate-spin" />
-          Redirecting to Google
+          <LoaderCircle className="mr-2 size-5 animate-spin" />
+          Redirecting...
         </>
       ) : (
         <>

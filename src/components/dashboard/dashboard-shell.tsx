@@ -3,7 +3,14 @@
 import * as React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { LogOut, Menu, UserRound, Layout, Bell } from "lucide-react"
+import {
+  Bell,
+  ChevronDown,
+  LayoutDashboard,
+  LogOut,
+  Menu,
+  UserRound,
+} from "lucide-react"
 import { signOut } from "next-auth/react"
 
 import { getNavItems, type DashboardRole } from "@/components/dashboard/dashboard-nav"
@@ -20,7 +27,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { cn } from "@/lib/utils"
 
 type DashboardShellProps = {
   children: React.ReactNode
@@ -69,38 +75,62 @@ function DashboardUserMenu({
       <DropdownMenuTrigger asChild>
         <Button
           variant="outline"
-          className="h-11 w-11 rounded-full border-border/40 bg-background/40 p-0 shadow-sm backdrop-blur-md transition-all hover:bg-background/60 active:scale-95 ring-1 ring-primary/10"
+          className="h-11 rounded-full border-white/10 bg-white/[0.05] px-2.5 text-white shadow-[0_18px_40px_-28px_rgba(2,10,20,0.82)] backdrop-blur-xl transition-colors hover:bg-white/[0.1]"
         >
-          <Avatar className="h-9 w-9">
+          <Avatar className="size-8">
             <AvatarImage src={user.image ?? undefined} alt={name} />
-            <AvatarFallback className="bg-primary/10 text-xs font-bold text-primary">{getInitials(name, email)}</AvatarFallback>
+            <AvatarFallback className="bg-primary/15 text-[0.65rem] font-bold text-primary ring-1 ring-white/10">
+              {getInitials(name, email)}
+            </AvatarFallback>
           </Avatar>
+          <span className="hidden text-left md:block">
+            <span className="block max-w-28 truncate pl-2 text-xs font-bold text-white">
+              {name}
+            </span>
+          </span>
+          <ChevronDown className="ml-1 size-3 shrink-0 text-white/70" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-64 rounded-2xl border-border/50 bg-background/80 backdrop-blur-xl">
-        <DropdownMenuLabel className="p-4">
-          <div className="flex flex-col space-y-1">
-            <p className="text-sm font-bold text-foreground leading-none">{name}</p>
-            <p className="text-xs text-muted-foreground font-medium truncate">{email}</p>
+      <DropdownMenuContent
+        align="end"
+        sideOffset={10}
+        className="w-72 rounded-[1.7rem] border-white/10 bg-[#0d1620]/95 p-2 text-white shadow-[0_30px_90px_-50px_rgba(2,10,20,0.96)]"
+      >
+        <DropdownMenuLabel className="px-0 py-0 normal-case tracking-normal">
+          <div className="rounded-[1.2rem] border border-white/10 bg-white/[0.04] px-4 py-3">
+            <p className="text-sm font-semibold text-white">{name}</p>
+            <p className="mt-1 truncate text-xs text-white/58">{email}</p>
           </div>
         </DropdownMenuLabel>
-        <DropdownMenuSeparator className="bg-border/50" />
-        <DropdownMenuItem asChild className="cursor-pointer rounded-xl m-1 transition-colors hover:bg-primary/10 hover:text-primary">
-          <Link href="/dashboard/profile" className="flex items-center">
-            <UserRound className="mr-2 size-4" />
-            Profile Settings
+        <DropdownMenuSeparator className="my-2 bg-white/10" />
+        <DropdownMenuItem
+          asChild
+          className="rounded-[1rem] px-3 py-3 text-white/82 focus:bg-white/[0.08] focus:text-white"
+        >
+          <Link href="/dashboard" className="flex items-center gap-2.5">
+            <LayoutDashboard className="size-4 shrink-0" />
+            Dashboard
           </Link>
         </DropdownMenuItem>
-        <DropdownMenuSeparator className="bg-border/50" />
+        <DropdownMenuItem
+          asChild
+          className="rounded-[1rem] px-3 py-3 text-white/82 focus:bg-white/[0.08] focus:text-white"
+        >
+          <Link href="/dashboard/profile" className="flex items-center gap-2.5">
+            <UserRound className="size-4 shrink-0" />
+            Profile
+          </Link>
+        </DropdownMenuItem>
+        <DropdownMenuSeparator className="my-2 bg-white/10" />
         <DropdownMenuItem
           variant="destructive"
-          className="cursor-pointer rounded-xl m-1"
+          className="rounded-[1rem] px-3 py-3 font-medium text-red-300 focus:bg-red-500/10 focus:text-red-200"
           onSelect={(event) => {
             event.preventDefault()
             void signOut({ callbackUrl: "/" })
           }}
         >
-          <LogOut className="mr-2 size-4" />
+          <LogOut className="size-4 shrink-0" />
           Sign Out
         </DropdownMenuItem>
       </DropdownMenuContent>
@@ -114,37 +144,32 @@ export function DashboardShell({ children, role, user }: DashboardShellProps) {
   const pageTitle = getPageTitle(pathname, role)
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(ellipse_at_top_right,var(--primary-muted),transparent)] dark:bg-transparent">
-      <div className="mx-auto w-full max-w-[1600px] px-4 py-6 sm:px-6 lg:grid lg:grid-cols-[18rem_1fr] lg:gap-8 lg:px-8">
+    <div className="min-h-screen px-4 py-6 sm:px-6 lg:px-8">
+      <div className="mx-auto grid w-full max-w-[1580px] gap-6 lg:grid-cols-[18rem_minmax(0,1fr)]">
         
-        {/* --- DESKTOP SIDEBAR --- */}
         <aside className="hidden lg:block">
-          <div className="sticky top-6 h-[calc(100vh-3rem)] overflow-hidden rounded-[2.5rem] border border-border/40 bg-background/60 shadow-2xl backdrop-blur-xl">
+          <div className="sticky top-5 overflow-hidden rounded-[2.5rem] border border-white/10 bg-[#0b131c]/82 shadow-[0_28px_90px_-54px_rgba(2,10,20,0.88)] backdrop-blur-xl transition-colors duration-500">
             <DashboardSidebar pathname={pathname} role={role} />
           </div>
         </aside>
 
-        {/* --- MAIN CONTENT AREA --- */}
-        <div className="flex flex-col space-y-8">
-          
-          {/* --- DASHBOARD HEADER --- */}
-          <header className="sticky top-6 z-30 flex items-center justify-between gap-4 rounded-[2rem] border border-border/30 bg-background/60 px-5 py-4 shadow-xl backdrop-blur-xl transition-all duration-300 sm:px-8">
-            <div className="flex items-center gap-4">
-              {/* Mobile Menu Trigger */}
+        <div className="flex min-w-0 flex-col gap-6">
+          <header className="sticky top-5 z-40 flex items-center justify-between gap-4 rounded-[2rem] border border-white/10 bg-[#0b131c]/78 px-4 py-4 shadow-[0_24px_80px_-48px_rgba(2,10,20,0.88)] backdrop-blur-xl transition-colors duration-500 sm:px-6">
+            <div className="flex min-w-0 items-center gap-4">
               <div className="lg:hidden">
                 <Sheet open={open} onOpenChange={setOpen}>
                   <SheetTrigger asChild>
                     <Button
                       variant="outline"
                       size="icon"
-                      className="rounded-xl border-border/60 bg-background/40 shadow-sm backdrop-blur-md active:scale-95"
+                      className="rounded-full border-white/10 bg-white/[0.05] text-white transition-colors hover:bg-white/[0.1]"
                     >
-                      <Menu className="size-5" />
+                      <Menu className="size-4 shrink-0" />
                     </Button>
                   </SheetTrigger>
                   <SheetContent
                     side="left"
-                    className="w-[85vw] max-w-sm border-r border-border/40 bg-background/95 px-0 backdrop-blur-xl"
+                    className="w-[85vw] max-w-sm border-r border-white/10 bg-[#0b131c]/96 p-0 text-white shadow-[0_30px_90px_-50px_rgba(2,10,20,0.96)] backdrop-blur-2xl"
                   >
                     <DashboardSidebar
                       pathname={pathname}
@@ -155,64 +180,66 @@ export function DashboardShell({ children, role, user }: DashboardShellProps) {
                 </Sheet>
               </div>
 
-              <div className="flex flex-col">
-                <div className="flex items-center gap-2">
-                  <span className="hidden sm:inline-flex rounded-md bg-primary/10 p-1">
-                    <Layout className="size-3.5 text-primary" />
-                  </span>
-                  <p className="text-[0.65rem] font-bold uppercase tracking-[0.25em] text-muted-foreground/80">
-                    EstatePro Portal
-                  </p>
-                </div>
-                <h1 className="text-xl font-black tracking-tight text-foreground sm:text-2xl">
+              <span className="inline-flex size-11 shrink-0 items-center justify-center rounded-[1.15rem] border border-white/10 bg-white/[0.05] text-primary transition-colors">
+                <LayoutDashboard className="size-5 shrink-0" />
+              </span>
+
+              <div className="min-w-0">
+                <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-white/50">
+                  EstatePro Portal
+                </p>
+                <h1 className="truncate text-xl font-bold tracking-tight text-white sm:text-2xl">
                   {pageTitle}
                 </h1>
               </div>
             </div>
 
-            <div className="flex items-center gap-2 sm:gap-4">
-              {/* Desktop Profile Status */}
-              <div className="hidden items-center gap-3 rounded-2xl border border-border/40 bg-secondary/30 px-4 py-2 backdrop-blur-md sm:flex">
-                <div className="flex flex-col items-end text-right">
-                  <p className="text-[0.7rem] font-bold text-foreground leading-none">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <div className="hidden items-center gap-3 rounded-full border border-white/10 bg-white/[0.05] px-4 py-2 shadow-[0_18px_40px_-28px_rgba(2,10,20,0.7)] backdrop-blur-xl md:flex">
+                <div className="text-right">
+                  <p className="text-xs font-bold text-white">
                     {user.name ?? "Member"}
                   </p>
-                  <p className="text-[0.6rem] font-medium text-muted-foreground">Verified Account</p>
+                  <p className="text-[0.6rem] font-bold uppercase tracking-[0.16em] text-white/48">
+                    Verified account
+                  </p>
                 </div>
                 <div className="relative">
-                  <Avatar size="sm" className="h-8 w-8 ring-2 ring-background">
+                  <Avatar className="size-9 ring-2 ring-[#0b131c]">
                     <AvatarImage src={user.image ?? undefined} alt={user.name ?? "User"} />
-                    <AvatarFallback className="bg-primary/20 text-[10px] font-black text-primary">{getInitials(user.name, user.email)}</AvatarFallback>
+                    <AvatarFallback className="bg-primary/15 text-[0.65rem] font-bold text-primary ring-1 ring-white/10">
+                      {getInitials(user.name, user.email)}
+                    </AvatarFallback>
                   </Avatar>
-                  <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full border-2 border-background bg-emerald-500 shadow-sm" />
+                  <span className="absolute bottom-0 right-0 size-2.5 rounded-full border-2 border-[#0b131c] bg-emerald-400" />
                 </div>
               </div>
 
-              <div className="flex items-center gap-2">
-                <div className="hidden sm:block">
-                  <ThemeToggle />
-                </div>
-                <Button variant="ghost" size="icon" className="rounded-full hover:bg-primary/10 hover:text-primary relative">
-                  <Bell className="size-5" />
-                  <span className="absolute top-2 right-2 h-2 w-2 rounded-full bg-primary" />
-                </Button>
-                <DashboardUserMenu user={user} />
-              </div>
+              <ThemeToggle className="border-white/10 bg-white/[0.05] text-white hover:bg-white/[0.1] dark:border-white/10 dark:bg-white/[0.05] dark:hover:bg-white/[0.1]" />
+
+              <Button
+                variant="outline"
+                size="icon"
+                className="relative rounded-full border-white/10 bg-white/[0.05] text-white transition-colors hover:bg-white/[0.1]"
+              >
+                <Bell className="size-4 shrink-0" />
+                <span className="absolute right-2 top-2 size-2 rounded-full border border-[#0b131c] bg-primary" />
+              </Button>
+
+              <DashboardUserMenu user={user} />
             </div>
           </header>
 
-          {/* --- MAIN PAGE CONTENT --- */}
-          <main className="min-h-[calc(100vh-12rem)] animate-in fade-in slide-in-from-bottom-4 duration-700">
-            <div className="rounded-[2.5rem] bg-transparent">
+          <main className="min-h-[calc(100vh-10rem)] animate-in fade-in slide-in-from-bottom-4 duration-500">
+            <div className="rounded-[2.5rem] border border-black/5 bg-black/[0.02] p-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.5)] transition-colors dark:border-white/5 dark:bg-white/[0.02] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]">
               {children}
             </div>
           </main>
 
-          {/* --- OPTIONAL DASHBOARD FOOTER --- */}
-          <footer className="pt-4 pb-8 border-t border-border/20">
-             <p className="text-center text-[0.65rem] font-bold uppercase tracking-[0.3em] text-muted-foreground/40">
-                Secure Infrastructure • EstatePro Real Estate Systems
-             </p>
+          <footer className="pb-8 pt-2">
+            <p className="text-center text-[0.65rem] font-bold uppercase tracking-[0.2em] text-slate-400 dark:text-white/40">
+              Secure infrastructure | EstatePro real estate systems
+            </p>
           </footer>
         </div>
       </div>

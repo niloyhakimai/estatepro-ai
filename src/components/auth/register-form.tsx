@@ -14,7 +14,6 @@ import {
 import { GoogleAuthButton } from "@/components/auth/google-auth-button"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import { cn } from "@/lib/utils"
 
 const initialState: RegisterFormState = {
@@ -35,18 +34,17 @@ function RegisterSubmitButton({
   return (
     <Button
       type="submit"
-      size="lg"
-      className="w-full rounded-2xl"
       disabled={isBusy}
+      className="h-12 w-full rounded-[1.15rem] bg-slate-900 px-8 font-bold text-white shadow-md transition-all hover:scale-[1.02] hover:bg-slate-800 active:scale-[0.98] dark:bg-[#b8f579] dark:text-black dark:shadow-[0_14px_34px_-20px_rgba(184,245,121,0.95)] dark:hover:bg-[#a6e55d]"
     >
       {isBusy ? (
         <>
-          <LoaderCircle className="size-4 animate-spin" />
-          Creating account
+          <LoaderCircle className="mr-2 size-5 animate-spin" />
+          Creating account...
         </>
       ) : (
         <>
-          <UserPlus className="size-4" />
+          <UserPlus className="mr-2 size-4" />
           Create account
         </>
       )}
@@ -184,43 +182,43 @@ export function RegisterForm({
         "Create a premium account to unlock your private dashboard and concierge-level listing experience.")
 
   const feedbackToneClass = clientMessage
-    ? "text-destructive"
+    ? "text-red-500"
     : state.status === "success" || authPhase === "signing-in"
-      ? "text-primary"
+      ? "text-emerald-600 dark:text-emerald-400"
       : state.status === "error"
-        ? "text-destructive"
-        : "text-muted-foreground"
+        ? "text-red-500"
+        : "text-slate-500 dark:text-white/50"
 
   return (
     <>
       {showSuccessOverlay ? (
-        <div className="fixed inset-0 z-[120] flex items-center justify-center bg-slate-950/72 px-6 backdrop-blur-xl">
-          <div className="relative w-full max-w-xl overflow-hidden rounded-[2.5rem] border border-white/10 bg-background/90 p-8 shadow-[0_40px_120px_-48px_rgba(0,0,0,0.95)] backdrop-blur-2xl sm:p-10">
+        <div className="fixed inset-0 z-[120] flex items-center justify-center bg-slate-100/50 px-6 backdrop-blur-xl transition-colors dark:bg-slate-950/80">
+          <div className="relative w-full max-w-xl overflow-hidden rounded-[3rem] border border-black/5 bg-white/90 p-8 shadow-[0_40px_120px_-48px_rgba(15,23,42,0.3)] backdrop-blur-2xl transition-colors dark:border-white/10 dark:bg-black/90 dark:shadow-[0_40px_120px_-48px_rgba(0,0,0,0.95)] sm:p-12">
             <div
               aria-hidden="true"
-              className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(37,177,166,0.22),transparent_42%),radial-gradient(circle_at_bottom_right,rgba(200,148,67,0.16),transparent_34%)]"
+              className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(37,177,166,0.1),transparent_42%),radial-gradient(circle_at_bottom_right,rgba(200,148,67,0.08),transparent_34%)] dark:bg-[radial-gradient(circle_at_top,rgba(37,177,166,0.22),transparent_42%),radial-gradient(circle_at_bottom_right,rgba(200,148,67,0.16),transparent_34%)]"
             />
 
             <div className="relative flex flex-col items-center text-center">
-              <div className="mb-6 flex size-20 items-center justify-center rounded-[2rem] border border-primary/20 bg-primary/10 text-primary shadow-[0_0_0_14px_rgba(37,177,166,0.08)]">
+              <div className="mb-6 flex size-20 items-center justify-center rounded-[2rem] border border-primary/20 bg-primary/10 text-primary shadow-[0_0_0_14px_rgba(21,159,149,0.05)] transition-colors dark:bg-primary/20 dark:shadow-[0_0_0_14px_rgba(41,194,179,0.1)]">
                 <CheckCircle2 className="size-10" />
               </div>
               <p className="text-[0.72rem] font-bold uppercase tracking-[0.32em] text-primary">
                 Access Confirmed
               </p>
-              <h3 className="mt-3 text-3xl font-bold tracking-tight text-foreground sm:text-[2.1rem]">
+              <h3 className="mt-3 text-3xl font-black tracking-tight text-slate-900 transition-colors dark:text-white sm:text-[2.1rem]">
                 Welcome to EstatePro!
               </h3>
-              <p className="mt-3 max-w-md text-sm leading-7 text-muted-foreground">
+              <p className="mt-3 max-w-md text-sm font-medium leading-relaxed text-slate-600 transition-colors dark:text-white/70">
                 Your private membership has been activated and your premium workspace is being prepared.
               </p>
 
-              <div className="mt-7 inline-flex items-center gap-3 rounded-full border border-primary/20 bg-primary/10 px-5 py-3">
+              <div className="mt-8 inline-flex items-center gap-3 rounded-full border border-black/5 bg-black/[0.02] px-6 py-3 transition-colors dark:border-white/10 dark:bg-white/5">
                 <span className="relative flex size-2.5">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary/60" />
                   <span className="relative inline-flex size-2.5 rounded-full bg-primary" />
                 </span>
-                <span className="animate-pulse text-sm font-semibold text-foreground">
+                <span className="animate-pulse text-sm font-bold text-slate-900 transition-colors dark:text-white">
                   Redirecting to your dashboard...
                 </span>
               </div>
@@ -231,7 +229,7 @@ export function RegisterForm({
 
       <form
         action={formAction}
-        className="space-y-5"
+        className="space-y-6"
         onSubmit={() => {
           hasStartedAutoLoginRef.current = false
           setClientMessage("")
@@ -247,12 +245,12 @@ export function RegisterForm({
           <>
             <RegisterGoogleButton callbackUrl={callbackUrl} disabled={isLocked} />
 
-            <div className="relative py-1">
+            <div className="relative py-2">
               <div className="absolute inset-0 flex items-center">
-                <span className="w-full border-t border-border/60" />
+                <span className="w-full border-t border-black/10 dark:border-white/10" />
               </div>
               <div className="relative flex justify-center">
-                <span className="bg-background/60 px-3 text-[0.7rem] font-bold uppercase tracking-[0.2em] text-muted-foreground">
+                <span className="bg-white/80 px-4 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-slate-400 backdrop-blur-sm dark:bg-black/60 dark:text-white/40">
                   or create with email
                 </span>
               </div>
@@ -260,8 +258,13 @@ export function RegisterForm({
           </>
         ) : null}
 
-        <div className="space-y-2">
-          <Label htmlFor="register-name">Full Name</Label>
+        <div className="space-y-2.5">
+          <label
+            htmlFor="register-name"
+            className="pl-1 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-slate-500 dark:text-white/60"
+          >
+            Full Name
+          </label>
           <Input
             id="register-name"
             name="name"
@@ -271,11 +274,17 @@ export function RegisterForm({
             onChange={(event) => setName(event.target.value)}
             required
             value={name}
+            className="h-12 rounded-[1.15rem] border-black/10 bg-white/50 px-4 text-slate-900 placeholder:text-slate-400 shadow-inner transition-all focus-visible:border-black/20 focus-visible:bg-white focus-visible:ring-black/10 dark:border-white/10 dark:bg-black/20 dark:text-white dark:placeholder:text-white/30 dark:focus-visible:border-white/20 dark:focus-visible:bg-black/40 dark:focus-visible:ring-white/10"
           />
         </div>
 
-        <div className="space-y-2">
-          <Label htmlFor="register-email">Email Address</Label>
+        <div className="space-y-2.5">
+          <label
+            htmlFor="register-email"
+            className="pl-1 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-slate-500 dark:text-white/60"
+          >
+            Email Address
+          </label>
           <Input
             id="register-email"
             name="email"
@@ -286,11 +295,17 @@ export function RegisterForm({
             onChange={(event) => setEmail(event.target.value)}
             required
             value={email}
+            className="h-12 rounded-[1.15rem] border-black/10 bg-white/50 px-4 text-slate-900 placeholder:text-slate-400 shadow-inner transition-all focus-visible:border-black/20 focus-visible:bg-white focus-visible:ring-black/10 dark:border-white/10 dark:bg-black/20 dark:text-white dark:placeholder:text-white/30 dark:focus-visible:border-white/20 dark:focus-visible:bg-black/40 dark:focus-visible:ring-white/10"
           />
         </div>
 
-        <div className="space-y-2">
-          <Label htmlFor="register-password">Password</Label>
+        <div className="space-y-2.5">
+          <label
+            htmlFor="register-password"
+            className="pl-1 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-slate-500 dark:text-white/60"
+          >
+            Password
+          </label>
           <Input
             id="register-password"
             name="password"
@@ -301,31 +316,34 @@ export function RegisterForm({
             onChange={(event) => setPassword(event.target.value)}
             required
             value={password}
+            className="h-12 rounded-[1.15rem] border-black/10 bg-white/50 px-4 text-slate-900 placeholder:text-slate-400 shadow-inner transition-all focus-visible:border-black/20 focus-visible:bg-white focus-visible:ring-black/10 dark:border-white/10 dark:bg-black/20 dark:text-white dark:placeholder:text-white/30 dark:focus-visible:border-white/20 dark:focus-visible:bg-black/40 dark:focus-visible:ring-white/10"
           />
         </div>
 
         <p
           aria-live="polite"
-          className={cn("text-sm leading-7", feedbackToneClass)}
+          className={cn("px-1 text-[0.8rem] font-medium leading-relaxed transition-colors", feedbackToneClass)}
         >
           {feedbackMessage}
         </p>
 
-        <RegisterSubmitButton disabled={isLocked} pending={isPending} />
+        <div className="space-y-3">
+          <RegisterSubmitButton disabled={isLocked} pending={isPending} />
 
-        <Button
-          asChild
-          variant="outline"
-          className={cn(
-            "w-full rounded-2xl",
-            state.status === "success" ? "opacity-100" : "opacity-90"
-          )}
-        >
-          <Link href={`/login?callbackUrl=${encodeURIComponent(callbackUrl)}`}>
-            <LogIn className="size-4" />
-            Sign in with existing account
-          </Link>
-        </Button>
+          <Button
+            asChild
+            variant="outline"
+            className={cn(
+              "h-12 w-full rounded-[1.15rem] border-black/10 bg-white/50 px-8 font-bold text-slate-700 shadow-sm backdrop-blur-md transition-all hover:-translate-y-0.5 hover:bg-white hover:shadow-md dark:border-white/10 dark:bg-black/20 dark:text-white dark:hover:bg-black/40",
+              state.status === "success" ? "opacity-100" : "opacity-90"
+            )}
+          >
+            <Link href={`/login?callbackUrl=${encodeURIComponent(callbackUrl)}`}>
+              <LogIn className="mr-2 size-4" />
+              Sign in with existing account
+            </Link>
+          </Button>
+        </div>
       </form>
     </>
   )

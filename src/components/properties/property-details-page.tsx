@@ -118,44 +118,62 @@ export async function PropertyDetailsPageContent({
   const signInHref = buildLoginHref(callbackPath)
 
   return (
-    <div className="min-h-screen bg-background/50 pb-24">
+    <div className="min-h-screen bg-slate-50/50 pb-24 transition-colors duration-500 dark:bg-black/20">
       <section className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
-        <div className="space-y-10">
+        <div className="space-y-12">
           
           {/* --- TOP HEADER --- */}
           <div className="flex flex-col gap-6">
-            <Button asChild variant="ghost" className="w-fit rounded-full hover:bg-primary/10 hover:text-primary transition-colors">
+            <Button 
+              asChild 
+              variant="ghost" 
+              className="w-fit rounded-full px-4 text-slate-600 transition-colors hover:bg-black/5 hover:text-slate-900 dark:text-white/70 dark:hover:bg-white/10 dark:hover:text-white"
+            >
               <Link href="/explore">
                 <ChevronLeft className="mr-2 size-4" />
                 Back to Explore
               </Link>
             </Button>
 
-            <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
-              <div className="max-w-3xl space-y-4">
-                <div className="flex flex-wrap gap-3 items-center">
-                  <Badge variant={property.isAvailable ? "default" : "outline"} className={property.isAvailable ? "bg-primary/10 text-primary border-primary/20 hover:bg-primary/20 text-sm py-1 px-3 shadow-sm" : "text-sm py-1 px-3"}>
+            <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
+              <div className="max-w-3xl space-y-5">
+                <div className="flex flex-wrap items-center gap-3">
+                  <Badge 
+                    variant={property.isAvailable ? "default" : "outline"} 
+                    className={
+                      property.isAvailable 
+                        ? "bg-primary/10 px-3 py-1.5 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-primary shadow-sm dark:bg-primary/20" 
+                        : "border-black/10 px-3 py-1.5 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-slate-500 dark:border-white/20 dark:text-white/50"
+                    }
+                  >
                     {property.isAvailable ? (
                       <span className="flex items-center gap-1.5"><CheckCircle2 className="size-3.5" /> Available Now</span>
                     ) : "Off Market"}
                   </Badge>
-                  <Badge variant="secondary" className="bg-secondary/50 backdrop-blur-sm text-sm py-1 px-3">Exclusive Listing</Badge>
+                  <Badge 
+                    variant="secondary" 
+                    className="border border-black/5 bg-white/60 px-3 py-1.5 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-slate-600 shadow-sm backdrop-blur-sm dark:border-white/10 dark:bg-black/40 dark:text-white/70"
+                  >
+                    Exclusive Listing
+                  </Badge>
                 </div>
-                <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl leading-tight">
+                <h1 className="text-4xl font-black leading-tight tracking-tight text-slate-900 drop-shadow-sm transition-colors dark:text-white sm:text-5xl lg:text-[4rem]">
                   {property.title}
                 </h1>
-                <p className="flex items-center gap-2 text-lg text-muted-foreground font-medium">
-                  <span className="p-1.5 rounded-full bg-primary/10"><MapPin className="size-5 text-primary" /></span>
+                <p className="flex items-center gap-2.5 text-lg font-medium text-slate-600 transition-colors dark:text-white/70">
+                  <span className="rounded-full border border-black/5 bg-white/60 p-2 shadow-sm backdrop-blur-md dark:border-white/10 dark:bg-black/40">
+                    <MapPin className="size-4 text-primary" />
+                  </span>
                   {property.location}
                 </p>
               </div>
 
               {/* Price Card */}
-              <div className="shrink-0 rounded-[2rem] border border-border/50 bg-gradient-to-br from-background/80 to-secondary/30 px-8 py-6 shadow-xl backdrop-blur-xl">
-                <p className="text-sm font-bold uppercase tracking-[0.2em] text-muted-foreground mb-2">
+              <div className="shrink-0 rounded-[2.5rem] border border-black/5 bg-white/60 px-8 py-8 shadow-[0_28px_90px_-54px_rgba(15,23,42,0.15)] backdrop-blur-xl transition-colors duration-500 dark:border-white/10 dark:bg-black/40 dark:shadow-[0_28px_90px_-54px_rgba(0,0,0,0.8)]">
+                <p className="mb-2 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-slate-500 dark:text-white/50">
                   Asking Price
                 </p>
-                <p className="text-4xl font-bold text-primary lg:text-5xl drop-shadow-sm">
+                <p className="text-4xl font-black text-slate-900 drop-shadow-sm transition-colors dark:text-white lg:text-[3.2rem]">
                   {formatPrice(property.price)}
                 </p>
               </div>
@@ -163,133 +181,104 @@ export async function PropertyDetailsPageContent({
           </div>
 
           {/* --- IMAGE GALLERY --- */}
-          <div className="rounded-[2.5rem] overflow-hidden shadow-2xl border border-border/20">
+          <div className="overflow-hidden rounded-[2.5rem] border border-black/5 bg-white/40 shadow-[0_38px_110px_-42px_rgba(15,23,42,0.15)] backdrop-blur-md transition-colors duration-500 dark:border-white/10 dark:bg-black/20 dark:shadow-[0_38px_110px_-42px_rgba(0,0,0,0.8)]">
             <PropertyMediaGallery images={property.images} title={property.title} />
           </div>
 
           {/* --- MAIN CONTENT & SIDEBAR --- */}
-          <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_24rem] items-start">
+          <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_24rem]">
             
             {/* Left Content Column */}
             <div className="space-y-10">
               
               {/* Description */}
-              <Card className="border-border/40 shadow-lg bg-background/60 backdrop-blur-sm overflow-hidden">
-                <CardHeader className="bg-secondary/20 pb-4 border-b border-border/30">
-                  <CardTitle className="text-2xl font-bold flex items-center gap-2">
-                    About this property
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="pt-6">
-                  <p className="text-lg leading-relaxed text-muted-foreground whitespace-pre-wrap">
+              <div className="space-y-4">
+                <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
+                  About this property
+                </h2>
+                <div className="rounded-[2rem] border border-black/5 bg-white/60 p-6 shadow-[0_20px_60px_-40px_rgba(15,23,42,0.1)] backdrop-blur-xl transition-colors duration-500 dark:border-white/10 dark:bg-black/40 dark:shadow-[0_20px_60px_-40px_rgba(0,0,0,0.6)] sm:p-8">
+                  <p className="whitespace-pre-wrap text-[1.05rem] leading-[1.8] text-slate-600 dark:text-white/70">
                     {property.description}
                   </p>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
 
               {/* Specifications */}
-              <Card className="border-border/40 shadow-lg bg-background/60 backdrop-blur-sm">
-                <CardHeader className="pb-4">
-                  <CardTitle className="text-2xl font-bold">Key Specifications</CardTitle>
-                </CardHeader>
-                <CardContent className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-                  <div className="flex flex-col items-center justify-center text-center rounded-[2rem] border border-border/50 bg-background/80 p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-md hover:border-primary/30">
-                    <div className="rounded-2xl bg-primary/10 p-3 mb-3">
-                      <BedDouble className="size-6 text-primary" />
+              <div className="space-y-4">
+                <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
+                  Key Specifications
+                </h2>
+                <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+                  {[
+                    { icon: BedDouble, value: property.bedrooms, label: "Bedrooms" },
+                    { icon: Bath, value: property.bathrooms, label: "Bathrooms" },
+                    { icon: Ruler, value: formatArea(property.areaSqFt), label: "Sq Ft" },
+                    { icon: MapPin, value: property.location.split(',')[0], label: "Area" },
+                  ].map((stat, i) => (
+                    <div key={i} className="group flex flex-col items-center justify-center rounded-[1.75rem] border border-black/5 bg-white/60 p-6 text-center shadow-[0_10px_40px_-20px_rgba(15,23,42,0.1)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-black/10 hover:bg-white/80 hover:shadow-xl dark:border-white/10 dark:bg-black/40 dark:shadow-[0_10px_40px_-20px_rgba(0,0,0,0.6)] dark:hover:border-white/20 dark:hover:bg-black/60">
+                      <div className="mb-4 rounded-2xl border border-black/5 bg-black/5 p-3.5 transition-colors dark:border-white/10 dark:bg-white/5">
+                        <stat.icon className="size-6 text-primary transition-transform group-hover:scale-110" />
+                      </div>
+                      <p className="w-full truncate px-2 text-2xl font-bold text-slate-900 dark:text-white">
+                        {stat.value}
+                      </p>
+                      <p className="mt-1 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-slate-500 dark:text-white/50">
+                        {stat.label}
+                      </p>
                     </div>
-                    <p className="text-3xl font-bold text-foreground">
-                      {property.bedrooms}
-                    </p>
-                    <p className="mt-1 text-sm font-medium text-muted-foreground">Bedrooms</p>
-                  </div>
-                  <div className="flex flex-col items-center justify-center text-center rounded-[2rem] border border-border/50 bg-background/80 p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-md hover:border-primary/30">
-                    <div className="rounded-2xl bg-primary/10 p-3 mb-3">
-                      <Bath className="size-6 text-primary" />
-                    </div>
-                    <p className="text-3xl font-bold text-foreground">
-                      {property.bathrooms}
-                    </p>
-                    <p className="mt-1 text-sm font-medium text-muted-foreground">Bathrooms</p>
-                  </div>
-                  <div className="flex flex-col items-center justify-center text-center rounded-[2rem] border border-border/50 bg-background/80 p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-md hover:border-primary/30">
-                    <div className="rounded-2xl bg-primary/10 p-3 mb-3">
-                      <Ruler className="size-6 text-primary" />
-                    </div>
-                    <p className="text-3xl font-bold text-foreground">
-                      {formatArea(property.areaSqFt)}
-                    </p>
-                    <p className="mt-1 text-sm font-medium text-muted-foreground">Sq Ft</p>
-                  </div>
-                  <div className="flex flex-col items-center justify-center text-center rounded-[2rem] border border-border/50 bg-background/80 p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-md hover:border-primary/30">
-                    <div className="rounded-2xl bg-primary/10 p-3 mb-3">
-                      <MapPin className="size-6 text-primary" />
-                    </div>
-                    <p className="text-xl font-bold text-foreground truncate w-full px-2" title={property.location}>
-                      {property.location}
-                    </p>
-                    <p className="mt-1 text-sm font-medium text-muted-foreground">Location</p>
-                  </div>
-                </CardContent>
-              </Card>
+                  ))}
+                </div>
+              </div>
             </div>
 
             {/* Right Sidebar Column (Sticky) */}
-            <aside className="space-y-6 sticky top-28">
+            <aside className="sticky top-28 space-y-6">
               
               {/* Summary Card */}
-              <Card className="border-border/40 shadow-xl bg-background/80 backdrop-blur-xl">
-                <CardHeader className="pb-4">
-                  <CardTitle className="text-xl font-bold">Property Snapshot</CardTitle>
+              <Card className="overflow-hidden rounded-[2.5rem] border border-black/5 bg-white/60 shadow-[0_28px_90px_-54px_rgba(15,23,42,0.15)] backdrop-blur-xl transition-colors duration-500 dark:border-white/10 dark:bg-black/40 dark:shadow-[0_28px_90px_-54px_rgba(0,0,0,0.8)]">
+                <CardHeader className="border-b border-black/5 bg-black/[0.02] p-6 transition-colors dark:border-white/10 dark:bg-white/[0.02]">
+                  <CardTitle className="text-xl font-bold text-slate-900 dark:text-white">Property Snapshot</CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-3 text-sm font-medium text-muted-foreground">
-                  <div className="flex items-center justify-between rounded-xl border border-border/40 bg-background/50 px-4 py-3">
-                    <span>Price</span>
-                    <span className="font-bold text-foreground text-base">
-                      {formatPrice(property.price)}
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-between rounded-xl border border-border/40 bg-background/50 px-4 py-3">
-                    <span>Bedrooms</span>
-                    <span className="font-bold text-foreground text-base">
-                      {property.bedrooms}
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-between rounded-xl border border-border/40 bg-background/50 px-4 py-3">
-                    <span>Bathrooms</span>
-                    <span className="font-bold text-foreground text-base">
-                      {property.bathrooms}
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-between rounded-xl border border-border/40 bg-background/50 px-4 py-3">
-                    <span>Area</span>
-                    <span className="font-bold text-foreground text-base">
-                      {formatArea(property.areaSqFt)}
-                    </span>
-                  </div>
+                <CardContent className="space-y-3 p-6 text-sm font-medium">
+                  {[
+                    { label: "Price", value: formatPrice(property.price) },
+                    { label: "Bedrooms", value: property.bedrooms },
+                    { label: "Bathrooms", value: property.bathrooms },
+                    { label: "Area", value: formatArea(property.areaSqFt) },
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-center justify-between rounded-[1.15rem] border border-black/5 bg-black/[0.03] px-4 py-3.5 transition-colors dark:border-white/10 dark:bg-white/[0.03]">
+                      <span className="text-[0.65rem] font-bold uppercase tracking-wider text-slate-500 dark:text-white/60">{item.label}</span>
+                      <span className="text-sm font-bold text-slate-900 dark:text-white">
+                        {item.value}
+                      </span>
+                    </div>
+                  ))}
                 </CardContent>
               </Card>
 
               {/* Contact/Inquiry Card */}
-              <Card className="border-primary/20 shadow-xl bg-gradient-to-b from-primary/5 to-background backdrop-blur-xl">
-                <CardHeader className="pb-4">
-                  <Badge variant="default" className="w-fit mb-3 bg-primary text-primary-foreground">Contact Agent</Badge>
-                  <CardTitle className="text-2xl font-bold">Send an inquiry</CardTitle>
-                  <p className="text-sm leading-relaxed text-muted-foreground mt-2">
+              <Card className="overflow-hidden rounded-[2.5rem] border border-black/5 bg-white/60 shadow-[0_38px_110px_-42px_rgba(15,23,42,0.15)] backdrop-blur-xl transition-colors duration-500 dark:border-white/10 dark:bg-black/40 dark:shadow-[0_38px_110px_-42px_rgba(0,0,0,0.8)]">
+                <CardHeader className="p-8 pb-4">
+                  <Badge variant="secondary" className="mb-3 w-fit bg-primary/10 px-3 py-1.5 text-[0.65rem] uppercase tracking-[0.2em] text-primary shadow-sm dark:bg-primary/20">
+                    Contact Agent
+                  </Badge>
+                  <CardTitle className="text-2xl font-bold text-slate-900 dark:text-white">Send an inquiry</CardTitle>
+                  <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-white/70">
                     Ask about showings, financing timing, or move-in expectations. We respond within minutes.
                   </p>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="p-8 pt-4">
                   {session?.user ? (
                     <InquiryForm propertyId={property.id} />
                   ) : (
-                    <div className="space-y-5 rounded-[1.5rem] border border-border/60 bg-background/90 p-6 text-center shadow-sm">
-                      <div className="inline-flex rounded-full bg-primary/10 p-3 mb-2">
-                        <MessageSquareMore className="size-6 text-primary" />
+                    <div className="space-y-6 rounded-[2rem] border border-black/5 bg-black/[0.02] p-8 text-center transition-colors dark:border-white/10 dark:bg-white/[0.02]">
+                      <div className="mx-auto inline-flex items-center justify-center rounded-full border border-black/5 bg-white p-4 shadow-sm dark:border-white/10 dark:bg-black/60">
+                        <MessageSquareMore className="size-7 text-primary" />
                       </div>
-                      <p className="text-sm leading-relaxed text-foreground font-medium">
-                        Sign in to send a tracked inquiry directly to our advisory team.
+                      <p className="text-sm font-medium leading-relaxed text-slate-600 dark:text-white/70">
+                        Sign in to send a tracked inquiry directly to our elite advisory team.
                       </p>
-                      <Button asChild className="w-full rounded-xl h-12 text-base font-bold shadow-md transition-transform hover:-translate-y-0.5">
+                      <Button asChild className="h-12 w-full rounded-[1.15rem] bg-slate-900 px-8 font-bold text-white shadow-md transition-all hover:scale-[1.02] hover:bg-slate-800 active:scale-[0.98] dark:bg-[#b8f579] dark:text-black dark:shadow-[0_14px_34px_-20px_rgba(184,245,121,0.95)] dark:hover:bg-[#a6e55d]">
                         <Link href={signInHref}>
                           Sign in to inquire
                         </Link>
@@ -303,27 +292,29 @@ export async function PropertyDetailsPageContent({
 
           {/* --- RELATED PROPERTIES --- */}
           <div className="pt-10">
-            <div className="flex flex-col gap-2 mb-8">
-              <h2 className="text-3xl font-bold tracking-tight text-foreground">
+            <div className="mb-8 flex flex-col gap-2">
+              <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
                 Similar Properties
               </h2>
-              <p className="text-muted-foreground text-lg">Other listings you may want to compare in this range.</p>
+              <p className="text-lg font-medium text-slate-600 dark:text-white/70">
+                Other luxury listings you may want to compare in this range.
+              </p>
             </div>
             
             {relatedProperties.length > 0 ? (
-              <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 {relatedProperties.map((relatedProperty) => (
                   <PropertyCard key={relatedProperty.id} property={relatedProperty} />
                 ))}
               </div>
             ) : (
-              <div className="flex flex-col items-center justify-center rounded-[2.5rem] border border-dashed border-border/60 bg-background/50 p-12 text-center">
-                <div className="rounded-full bg-secondary/50 p-4 mb-4">
-                  <MapPin className="size-8 text-muted-foreground" />
+              <div className="flex flex-col items-center justify-center rounded-[2.5rem] border-2 border-dashed border-black/10 bg-black/[0.02] p-16 text-center transition-colors dark:border-white/10 dark:bg-white/[0.02]">
+                <div className="mb-6 rounded-full border border-black/5 bg-white p-5 shadow-sm dark:border-white/10 dark:bg-black/40">
+                  <MapPin className="size-8 text-primary" />
                 </div>
-                <h3 className="text-xl font-bold text-foreground mb-2">No similar properties yet</h3>
-                <p className="text-base text-muted-foreground max-w-md">
-                  More comparable properties will appear here as additional inventory is added to the platform.
+                <h3 className="mb-2 text-2xl font-bold text-slate-900 dark:text-white">No similar properties yet</h3>
+                <p className="max-w-md text-base font-medium text-slate-600 dark:text-white/70">
+                  More comparable properties will appear here as additional luxury inventory is added to the platform.
                 </p>
               </div>
             )}

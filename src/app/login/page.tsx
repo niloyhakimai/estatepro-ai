@@ -43,8 +43,8 @@ const demoAccounts = [
     destination: "/dashboard/admin",
     icon: ShieldCheck,
     accentClass:
-      "border-primary/25 bg-primary/[0.08] shadow-[0_28px_80px_-48px_rgba(37,177,166,0.9)]",
-    iconClass: "bg-primary/15 text-primary ring-1 ring-primary/20",
+      "border-amber-500/20 bg-amber-500/5 hover:bg-amber-500/10 dark:bg-amber-500/10 dark:hover:bg-amber-500/20 shadow-sm",
+    iconClass: "bg-amber-500/10 text-amber-600 dark:bg-amber-500/20 dark:text-amber-400",
   },
   {
     role: "Manager",
@@ -53,8 +53,8 @@ const demoAccounts = [
     destination: "/dashboard/manager",
     icon: UserCog,
     accentClass:
-      "border-accent/20 bg-accent/[0.08] shadow-[0_28px_80px_-48px_rgba(200,148,67,0.8)]",
-    iconClass: "bg-accent/15 text-accent ring-1 ring-accent/20",
+      "border-sky-500/20 bg-sky-500/5 hover:bg-sky-500/10 dark:bg-sky-500/10 dark:hover:bg-sky-500/20 shadow-sm",
+    iconClass: "bg-sky-500/10 text-sky-600 dark:bg-sky-500/20 dark:text-sky-400",
   },
   {
     role: "User",
@@ -63,8 +63,8 @@ const demoAccounts = [
     destination: "/dashboard/user",
     icon: CircleUserRound,
     accentClass:
-      "border-white/10 bg-white/[0.04] shadow-[0_28px_80px_-48px_rgba(148,163,184,0.45)]",
-    iconClass: "bg-white/10 text-foreground ring-1 ring-white/10",
+      "border-black/5 bg-white/60 hover:bg-white/80 dark:border-white/10 dark:bg-white/[0.03] dark:hover:bg-white/[0.06] shadow-sm",
+    iconClass: "bg-black/5 text-slate-700 dark:bg-white/10 dark:text-white/80",
   },
 ] as const
 
@@ -96,7 +96,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
   }
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center p-4 sm:p-8">
+    <div className="relative flex min-h-screen items-center justify-center p-4 sm:p-8">
       {/* --- FULLSCREEN BACKGROUND --- */}
       <div className="absolute inset-0 z-0">
         <img
@@ -104,23 +104,23 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
           alt="Luxury Estate Interior"
           className="h-full w-full object-cover object-center"
         />
-        <div className="absolute inset-0 bg-slate-950/60 backdrop-blur-sm mix-blend-multiply" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/10 via-background/40 to-background/90" />
+        <div className="absolute inset-0 bg-slate-100/70 backdrop-blur-md transition-colors duration-500 dark:bg-slate-950/80" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/50 to-white/90 transition-colors duration-500 dark:via-black/50 dark:to-black/90" />
       </div>
 
       {/* --- GLASSMORPHIC MAIN PANEL --- */}
-      <div className="relative z-10 w-full max-w-6xl grid overflow-hidden rounded-[2.5rem] sm:rounded-[3rem] border border-white/10 bg-background/80 shadow-2xl backdrop-blur-xl lg:grid-cols-[1.1fr_1fr]">
+      <div className="relative z-10 grid w-full max-w-6xl overflow-hidden rounded-[2.5rem] border border-black/5 bg-white/70 shadow-[0_38px_110px_-42px_rgba(15,23,42,0.3)] backdrop-blur-2xl transition-colors duration-500 dark:border-white/10 dark:bg-black/60 dark:shadow-[0_38px_110px_-42px_rgba(0,0,0,0.8)] sm:rounded-[3rem] lg:grid-cols-[1.1fr_1fr]">
         
         {/* Left Side: Brand & Info */}
         <div className="flex flex-col justify-between p-8 sm:p-12 lg:p-16">
           <div className="space-y-6">
-            <Badge variant="outline" className="border-primary/30 bg-primary/10 text-primary py-1.5 px-4 backdrop-blur-md">
+            <Badge variant="secondary" className="bg-primary/10 px-4 py-1.5 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-primary shadow-sm backdrop-blur-md dark:bg-primary/20">
               Client Portal
             </Badge>
-            <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+            <h1 className="text-4xl font-black tracking-tight text-slate-900 transition-colors dark:text-white sm:text-5xl">
               Welcome back to EstatePro.
             </h1>
-            <p className="max-w-md text-lg leading-relaxed text-muted-foreground">
+            <p className="max-w-md text-lg font-medium leading-relaxed text-slate-600 transition-colors dark:text-white/70">
               Sign in to manage your saved properties, track inquiries, and access your personalized real estate dashboard.
             </p>
           </div>
@@ -129,16 +129,16 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
             {loginHighlights.map(({ description, icon: Icon, title }) => (
               <div
                 key={title}
-                className="group flex items-start gap-4 rounded-2xl border border-border/30 bg-background/40 p-4 transition-all hover:bg-background/80 hover:shadow-md"
+                className="group flex items-start gap-4 rounded-2xl border border-black/5 bg-white/50 p-4 shadow-sm backdrop-blur-md transition-all hover:-translate-y-0.5 hover:bg-white/80 hover:shadow-md dark:border-white/10 dark:bg-black/40 dark:hover:bg-white/[0.05]"
               >
-                <span className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary transition-transform group-hover:scale-110">
+                <span className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary transition-transform group-hover:scale-110 dark:bg-primary/20">
                   <Icon className="size-5" />
                 </span>
                 <div>
-                  <h2 className="text-base font-bold text-foreground">
+                  <h2 className="text-base font-bold text-slate-900 transition-colors dark:text-white">
                     {title}
                   </h2>
-                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                  <p className="mt-1 text-sm font-medium leading-relaxed text-slate-500 transition-colors dark:text-white/60">
                     {description}
                   </p>
                 </div>
@@ -146,32 +146,32 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
             ))}
           </div>
 
-          <div className="mt-8 overflow-hidden rounded-[2rem] border border-white/10 bg-black/20 p-5 shadow-[0_28px_90px_-52px_rgba(0,0,0,0.95)] backdrop-blur-2xl">
+          <div className="mt-8 overflow-hidden rounded-[2.5rem] border border-black/5 bg-black/[0.02] p-6 shadow-inner transition-colors dark:border-white/10 dark:bg-black/40">
             <div className="flex items-start justify-between gap-4">
               <div className="space-y-3">
                 <Badge
-                  variant="outline"
-                  className="border-primary/20 bg-primary/10 px-3 py-1 text-primary"
+                  variant="secondary"
+                  className="bg-black/5 px-3 py-1 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-slate-600 shadow-none dark:bg-white/10 dark:text-white/70"
                 >
                   Quick Access
                 </Badge>
                 <div className="space-y-2">
-                  <h2 className="text-xl font-bold tracking-tight text-foreground">
+                  <h2 className="text-xl font-bold tracking-tight text-slate-900 dark:text-white">
                     Demo Credentials
                   </h2>
-                  <p className="max-w-xl text-sm leading-7 text-muted-foreground">
+                  <p className="max-w-xl text-sm font-medium leading-relaxed text-slate-500 dark:text-white/60">
                     Use these seeded premium accounts to preview each EstatePro
                     dashboard role with the luxury UI fully enabled.
                   </p>
                 </div>
               </div>
 
-              <div className="hidden size-14 shrink-0 items-center justify-center rounded-2xl border border-primary/15 bg-primary/10 text-primary shadow-[0_18px_40px_-24px_rgba(37,177,166,0.9)] sm:flex">
+              <div className="hidden size-14 shrink-0 items-center justify-center rounded-2xl border border-black/5 bg-white/60 text-primary shadow-sm dark:border-white/10 dark:bg-white/5 sm:flex">
                 <Sparkles className="size-6" />
               </div>
             </div>
 
-            <div className="mt-5 grid gap-3">
+            <div className="mt-6 grid gap-3">
               {demoAccounts.map(
                 ({
                   accentClass,
@@ -184,7 +184,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
                 }) => (
                   <div
                     key={email}
-                    className={`rounded-[1.6rem] border p-4 backdrop-blur-xl transition-transform hover:-translate-y-0.5 ${accentClass}`}
+                    className={`rounded-[1.6rem] border p-4 backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 ${accentClass}`}
                   >
                     <div className="flex items-start gap-4">
                       <div
@@ -195,17 +195,17 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
 
                       <div className="min-w-0 flex-1">
                         <div className="flex flex-wrap items-center gap-2">
-                          <p className="text-sm font-bold uppercase tracking-[0.2em] text-muted-foreground">
+                          <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-slate-500 dark:text-white/50">
                             {role}
                           </p>
-                          <span className="rounded-full border border-white/10 px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                          <span className="rounded-full border border-black/10 bg-black/5 px-2 py-0.5 text-[0.6rem] font-bold uppercase tracking-[0.18em] text-slate-500 dark:border-white/10 dark:bg-white/10 dark:text-white/50">
                             {destination}
                           </span>
                         </div>
-                        <h3 className="mt-2 text-base font-semibold text-foreground">
+                        <h3 className="mt-1.5 text-base font-bold text-slate-900 dark:text-white">
                           {title}
                         </h3>
-                        <p className="mt-1 break-all text-sm text-muted-foreground">
+                        <p className="mt-0.5 break-all text-sm font-medium text-slate-500 dark:text-white/60">
                           {email}
                         </p>
                       </div>
@@ -215,11 +215,11 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
               )}
             </div>
 
-            <div className="mt-4 rounded-[1.5rem] border border-primary/15 bg-primary/10 px-4 py-3">
-              <p className="text-[0.68rem] font-bold uppercase tracking-[0.28em] text-primary/80">
+            <div className="mt-5 rounded-[1.5rem] border border-primary/15 bg-primary/10 px-5 py-4 dark:bg-primary/20">
+              <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-primary">
                 Shared Demo Password
               </p>
-              <p className="mt-1 text-lg font-semibold tracking-[0.16em] text-foreground">
+              <p className="mt-1 text-lg font-black tracking-[0.16em] text-slate-900 dark:text-white">
                 12345678
               </p>
             </div>
@@ -227,15 +227,15 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
         </div>
 
         {/* Right Side: Login Form */}
-        <div className="flex flex-col justify-center border-t border-white/10 bg-card/40 p-8 sm:p-12 lg:border-l lg:border-t-0 lg:p-16">
-          <div className="space-y-6 mb-8 text-center sm:text-left">
-            <h2 className="text-3xl font-bold text-foreground">Sign In</h2>
-            <p className="text-sm font-medium text-muted-foreground">
+        <div className="flex flex-col justify-center border-t border-black/5 bg-white/40 p-8 transition-colors dark:border-white/10 dark:bg-black/40 sm:p-12 lg:border-l lg:border-t-0 lg:p-16">
+          <div className="mb-8 space-y-3 text-center sm:text-left">
+            <h2 className="text-3xl font-black tracking-tight text-slate-900 dark:text-white sm:text-4xl">Sign In</h2>
+            <p className="text-sm font-medium text-slate-500 dark:text-white/60">
               Enter your credentials to access your account.
             </p>
           </div>
 
-          <div className="rounded-[2rem] border border-border/50 bg-background/60 p-6 sm:p-8 shadow-xl backdrop-blur-md">
+          <div className="rounded-[2.5rem] border border-black/5 bg-white/60 p-6 shadow-xl backdrop-blur-xl transition-colors dark:border-white/10 dark:bg-black/40 sm:p-8">
             <LoginForm
               callbackUrl={callbackUrl}
               showGoogleAuth={hasGoogleProviderEnabled}
@@ -243,10 +243,10 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
           </div>
 
           <div className="mt-8 text-center sm:text-left">
-            <p className="text-sm font-medium text-muted-foreground">
+            <p className="text-sm font-medium text-slate-500 dark:text-white/60">
               Don&apos;t have an account yet?
             </p>
-            <Button asChild variant="link" className="mt-1 h-auto p-0 text-primary font-bold text-base hover:no-underline hover:text-primary/80">
+            <Button asChild variant="link" className="mt-1 h-auto p-0 text-base font-bold text-primary hover:text-primary/80 hover:no-underline">
               <Link
                 href={`/register?callbackUrl=${encodeURIComponent(callbackUrl)}`}
                 className="flex items-center"

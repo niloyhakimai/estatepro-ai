@@ -135,7 +135,10 @@ function AccordionItem({
       <div
         data-slot="accordion-item"
         data-state={isOpen ? "open" : "closed"}
-        className={cn("border-b border-border/60", className)}
+        className={cn(
+          "border-b border-black/5 transition-colors last:border-0 dark:border-white/10",
+          className
+        )}
         {...props}
       >
         {children}
@@ -162,7 +165,7 @@ function AccordionTrigger({
       aria-expanded={isOpen}
       id={triggerId}
       className={cn(
-        "flex w-full items-center justify-between gap-4 py-5 text-left text-base font-medium text-foreground transition-colors hover:text-primary",
+        "group flex w-full items-center justify-between gap-4 py-5 text-left text-[0.95rem] font-bold text-slate-900 transition-all hover:text-primary dark:text-white dark:hover:text-primary",
         className
       )}
       onClick={(event) => {
@@ -177,8 +180,8 @@ function AccordionTrigger({
       <span>{children}</span>
       <ChevronDown
         className={cn(
-          "size-4 shrink-0 text-muted-foreground transition-transform duration-200",
-          isOpen && "rotate-180"
+          "size-[1.15rem] shrink-0 text-slate-400 transition-transform duration-300 group-hover:text-primary dark:text-white/40",
+          isOpen && "rotate-180 text-primary dark:text-primary"
         )}
       />
     </button>
@@ -199,7 +202,7 @@ function AccordionContent({
       aria-hidden={!isOpen}
       aria-labelledby={triggerId}
       className={cn(
-        "grid transition-[grid-template-rows,opacity] duration-200 ease-out",
+        "grid transition-[grid-template-rows,opacity] duration-300 ease-out",
         isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0",
         className
       )}
@@ -208,7 +211,7 @@ function AccordionContent({
       {...props}
     >
       <div className="overflow-hidden">
-        <div className="pb-5 text-sm leading-7 text-muted-foreground">
+        <div className="pb-5 text-sm font-medium leading-relaxed text-slate-600 dark:text-white/70">
           {children}
         </div>
       </div>

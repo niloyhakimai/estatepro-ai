@@ -23,27 +23,27 @@ export function ListingImage({ alt, className, src }: ListingImageProps) {
       <div
         aria-label={alt}
         className={cn(
-          "relative flex h-full w-full items-center justify-center overflow-hidden bg-secondary/20",
+          "relative flex h-full w-full items-center justify-center overflow-hidden bg-black/5 transition-colors duration-500 dark:bg-white/5",
           className
         )}
       >
         {/* Premium placeholder background */}
-        <div className="absolute inset-0 opacity-20 grayscale">
+        <div className="absolute inset-0 opacity-30 grayscale transition-opacity duration-500 dark:opacity-20">
            <img
             src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=800&auto=format&fit=crop"
             alt="Placeholder background"
-            className="h-full w-full object-cover blur-sm"
+            className="h-full w-full object-cover blur-md"
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-br from-background/80 to-background/40 backdrop-blur-sm" />
+        <div className="absolute inset-0 bg-gradient-to-br from-white/90 to-white/40 backdrop-blur-md transition-colors duration-500 dark:from-black/90 dark:to-black/40" />
 
         <div className="relative z-10 flex flex-col items-center gap-4 text-center">
-          <span className="inline-flex size-14 items-center justify-center rounded-2xl bg-background/80 text-primary shadow-lg ring-1 ring-border/50 backdrop-blur-md">
+          <span className="inline-flex size-14 items-center justify-center rounded-2xl border border-black/10 bg-white/60 text-primary shadow-lg backdrop-blur-xl transition-all duration-500 dark:border-white/10 dark:bg-black/40 dark:shadow-2xl">
             <Building2 className="size-6" />
           </span>
           <div className="space-y-1">
-            <p className="text-sm font-bold text-foreground drop-shadow-sm">EstatePro</p>
-            <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-muted-foreground">Premium Media</p>
+            <p className="text-sm font-bold text-slate-900 drop-shadow-sm transition-colors duration-500 dark:text-white">EstatePro</p>
+            <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-slate-500 transition-colors duration-500 dark:text-white/60">Premium Media</p>
           </div>
         </div>
       </div>

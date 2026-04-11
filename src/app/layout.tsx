@@ -37,7 +37,11 @@ export default async function RootLayout({
           <div className="relative flex min-h-screen flex-col overflow-x-clip">
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[32rem] bg-[radial-gradient(circle_at_top_left,rgba(15,118,110,0.16),transparent_34%),radial-gradient(circle_at_78%_14%,rgba(200,148,67,0.14),transparent_28%)] dark:bg-[radial-gradient(circle_at_top_left,rgba(37,177,166,0.18),transparent_32%),radial-gradient(circle_at_78%_14%,rgba(211,166,92,0.14),transparent_26%)]"
+              className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[38rem] bg-[radial-gradient(circle_at_top_left,rgba(21,159,149,0.14),transparent_34%),radial-gradient(circle_at_80%_10%,rgba(199,153,83,0.12),transparent_26%)] dark:bg-[radial-gradient(circle_at_top_left,rgba(41,194,179,0.22),transparent_30%),radial-gradient(circle_at_80%_10%,rgba(215,171,99,0.14),transparent_24%)]"
+            />
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 -z-20 bg-[linear-gradient(180deg,rgba(237,242,246,0.55),transparent_26%,rgba(237,242,246,0.86))] dark:bg-[linear-gradient(180deg,rgba(6,10,15,0.92),rgba(6,10,15,0.82)_28%,rgba(6,10,15,0.98))]"
             />
             <SiteNavbar />
             <main className="flex-1">{children}</main>

@@ -9,7 +9,6 @@ import {
 } from "@/app/dashboard/admin/properties/new/actions"
 import { DashboardSubmitButton } from "@/components/dashboard/dashboard-submit-button"
 import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { cn } from "@/lib/utils"
 
@@ -28,67 +27,128 @@ export function NewPropertyForm() {
   }, [state.status])
 
   return (
-    <form ref={formRef} action={formAction} className="grid gap-5 lg:grid-cols-2">
-      <div className="space-y-2 lg:col-span-2">
-        <Label htmlFor="property-title">Title</Label>
-        <Input id="property-title" name="title" placeholder="Cedar Ridge Residence" required />
+    <form ref={formRef} action={formAction} className="grid gap-6 lg:grid-cols-2">
+      <div className="space-y-2.5 lg:col-span-2">
+        <label htmlFor="property-title" className="pl-1 text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-slate-500 dark:text-white/60">
+          Title
+        </label>
+        <Input 
+          id="property-title" 
+          name="title" 
+          placeholder="Cedar Ridge Residence" 
+          required 
+          className="h-12 rounded-[1.15rem] border-black/10 bg-white/50 px-4 text-slate-900 placeholder:text-slate-400 shadow-inner transition-all focus-visible:border-black/20 focus-visible:bg-white focus-visible:ring-black/10 dark:border-white/10 dark:bg-black/20 dark:text-white dark:placeholder:text-white/30 dark:focus-visible:border-white/20 dark:focus-visible:bg-black/40 dark:focus-visible:ring-white/10"
+        />
       </div>
 
-      <div className="space-y-2 lg:col-span-2">
-        <Label htmlFor="property-description">Description</Label>
+      <div className="space-y-2.5 lg:col-span-2">
+        <label htmlFor="property-description" className="pl-1 text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-slate-500 dark:text-white/60">
+          Description
+        </label>
         <Textarea
           id="property-description"
           name="description"
           placeholder="Describe the property, neighborhood highlights, condition, and any standout features."
           required
+          className="min-h-[120px] resize-none rounded-[1.15rem] border-black/10 bg-white/50 p-4 text-slate-900 placeholder:text-slate-400 shadow-inner transition-all focus-visible:border-black/20 focus-visible:bg-white focus-visible:ring-black/10 dark:border-white/10 dark:bg-black/20 dark:text-white dark:placeholder:text-white/30 dark:focus-visible:border-white/20 dark:focus-visible:bg-black/40 dark:focus-visible:ring-white/10"
         />
       </div>
 
-      <div className="space-y-2">
-        <Label htmlFor="property-price">Price</Label>
-        <Input id="property-price" name="price" type="number" min="1" step="0.01" required />
+      <div className="space-y-2.5">
+        <label htmlFor="property-price" className="pl-1 text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-slate-500 dark:text-white/60">
+          Price
+        </label>
+        <Input 
+          id="property-price" 
+          name="price" 
+          type="number" 
+          min="1" 
+          step="0.01" 
+          required 
+          className="h-12 rounded-[1.15rem] border-black/10 bg-white/50 px-4 text-slate-900 placeholder:text-slate-400 shadow-inner transition-all focus-visible:border-black/20 focus-visible:bg-white focus-visible:ring-black/10 dark:border-white/10 dark:bg-black/20 dark:text-white dark:placeholder:text-white/30 dark:focus-visible:border-white/20 dark:focus-visible:bg-black/40 dark:focus-visible:ring-white/10"
+        />
       </div>
 
-      <div className="space-y-2">
-        <Label htmlFor="property-location">Location</Label>
-        <Input id="property-location" name="location" placeholder="Austin, Texas" required />
+      <div className="space-y-2.5">
+        <label htmlFor="property-location" className="pl-1 text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-slate-500 dark:text-white/60">
+          Location
+        </label>
+        <Input 
+          id="property-location" 
+          name="location" 
+          placeholder="Austin, Texas" 
+          required 
+          className="h-12 rounded-[1.15rem] border-black/10 bg-white/50 px-4 text-slate-900 placeholder:text-slate-400 shadow-inner transition-all focus-visible:border-black/20 focus-visible:bg-white focus-visible:ring-black/10 dark:border-white/10 dark:bg-black/20 dark:text-white dark:placeholder:text-white/30 dark:focus-visible:border-white/20 dark:focus-visible:bg-black/40 dark:focus-visible:ring-white/10"
+        />
       </div>
 
-      <div className="space-y-2">
-        <Label htmlFor="property-bedrooms">Bedrooms</Label>
-        <Input id="property-bedrooms" name="bedrooms" type="number" min="1" step="1" required />
+      <div className="space-y-2.5">
+        <label htmlFor="property-bedrooms" className="pl-1 text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-slate-500 dark:text-white/60">
+          Bedrooms
+        </label>
+        <Input 
+          id="property-bedrooms" 
+          name="bedrooms" 
+          type="number" 
+          min="1" 
+          step="1" 
+          required 
+          className="h-12 rounded-[1.15rem] border-black/10 bg-white/50 px-4 text-slate-900 placeholder:text-slate-400 shadow-inner transition-all focus-visible:border-black/20 focus-visible:bg-white focus-visible:ring-black/10 dark:border-white/10 dark:bg-black/20 dark:text-white dark:placeholder:text-white/30 dark:focus-visible:border-white/20 dark:focus-visible:bg-black/40 dark:focus-visible:ring-white/10"
+        />
       </div>
 
-      <div className="space-y-2">
-        <Label htmlFor="property-bathrooms">Bathrooms</Label>
-        <Input id="property-bathrooms" name="bathrooms" type="number" min="1" step="1" required />
+      <div className="space-y-2.5">
+        <label htmlFor="property-bathrooms" className="pl-1 text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-slate-500 dark:text-white/60">
+          Bathrooms
+        </label>
+        <Input 
+          id="property-bathrooms" 
+          name="bathrooms" 
+          type="number" 
+          min="1" 
+          step="1" 
+          required 
+          className="h-12 rounded-[1.15rem] border-black/10 bg-white/50 px-4 text-slate-900 placeholder:text-slate-400 shadow-inner transition-all focus-visible:border-black/20 focus-visible:bg-white focus-visible:ring-black/10 dark:border-white/10 dark:bg-black/20 dark:text-white dark:placeholder:text-white/30 dark:focus-visible:border-white/20 dark:focus-visible:bg-black/40 dark:focus-visible:ring-white/10"
+        />
       </div>
 
-      <div className="space-y-2">
-        <Label htmlFor="property-area">Area (Sq Ft)</Label>
-        <Input id="property-area" name="areaSqFt" type="number" min="1" step="0.01" required />
+      <div className="space-y-2.5 lg:col-span-2">
+        <label htmlFor="property-area" className="pl-1 text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-slate-500 dark:text-white/60">
+          Area (Sq Ft)
+        </label>
+        <Input 
+          id="property-area" 
+          name="areaSqFt" 
+          type="number" 
+          min="1" 
+          step="0.01" 
+          required 
+          className="h-12 rounded-[1.15rem] border-black/10 bg-white/50 px-4 text-slate-900 placeholder:text-slate-400 shadow-inner transition-all focus-visible:border-black/20 focus-visible:bg-white focus-visible:ring-black/10 dark:border-white/10 dark:bg-black/20 dark:text-white dark:placeholder:text-white/30 dark:focus-visible:border-white/20 dark:focus-visible:bg-black/40 dark:focus-visible:ring-white/10"
+        />
       </div>
 
-      <div className="space-y-2">
-        <Label htmlFor="property-images">Image URLs (Optional)</Label>
+      <div className="space-y-2.5 lg:col-span-2">
+        <label htmlFor="property-images" className="pl-1 text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-slate-500 dark:text-white/60">
+          Image URLs (Optional)
+        </label>
         <Textarea
           id="property-images"
           name="imageUrls"
-          className="min-h-28"
+          className="min-h-[120px] resize-none rounded-[1.15rem] border-black/10 bg-white/50 p-4 text-slate-900 placeholder:text-slate-400 shadow-inner transition-all focus-visible:border-black/20 focus-visible:bg-white focus-visible:ring-black/10 dark:border-white/10 dark:bg-black/20 dark:text-white dark:placeholder:text-white/30 dark:focus-visible:border-white/20 dark:focus-visible:bg-black/40 dark:focus-visible:ring-white/10"
           placeholder="Add one image URL per line or separate them with commas."
         />
       </div>
 
-      <div className="space-y-4 lg:col-span-2">
+      <div className="space-y-4 pt-2 lg:col-span-2">
         <p
           aria-live="polite"
           className={cn(
-            "text-sm leading-7",
+            "px-1 text-[0.8rem] font-medium leading-relaxed transition-colors",
             state.status === "success"
-              ? "text-primary"
+              ? "text-emerald-600 dark:text-emerald-400"
               : state.status === "error"
-                ? "text-destructive"
-                : "text-muted-foreground"
+                ? "text-red-500"
+                : "text-slate-500 dark:text-white/50"
           )}
         >
           {state.message ??

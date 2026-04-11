@@ -1,3 +1,5 @@
+"use client"
+
 import Link from "next/link"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
@@ -72,9 +74,10 @@ export function ExplorePagination({
   const visiblePages = getVisiblePages(page, totalPages)
 
   return (
-    <div className="flex flex-col gap-4 rounded-[2rem] border border-border/40 bg-background/60 px-6 py-4 shadow-lg backdrop-blur-xl transition-all duration-300 sm:flex-row sm:items-center sm:justify-between mt-8">
-      <p className="text-sm font-medium text-muted-foreground bg-secondary/50 px-4 py-1.5 rounded-full border border-border/30">
-        Page <span className="text-foreground font-bold">{page}</span> of <span className="text-foreground font-bold">{totalPages}</span>
+    <div className="mt-8 flex flex-col gap-4 rounded-[1.9rem] border border-black/5 bg-white/60 px-5 py-4 shadow-sm backdrop-blur-xl transition-colors duration-500 dark:border-white/10 dark:bg-black/40 dark:shadow-xl sm:flex-row sm:items-center sm:justify-between sm:px-6">
+      <p className="rounded-full border border-black/5 bg-black/5 px-4 py-2 text-sm font-medium text-slate-600 transition-colors dark:border-white/10 dark:bg-white/[0.04] dark:text-white/70">
+        Page <span className="font-semibold text-slate-900 dark:text-white">{page}</span> of{" "}
+        <span className="font-semibold text-slate-900 dark:text-white">{totalPages}</span>
       </p>
 
       <div className="flex flex-wrap items-center gap-2">
@@ -82,64 +85,67 @@ export function ExplorePagination({
           asChild={page > 1}
           variant="outline"
           className={cn(
-            "rounded-xl h-10 px-4 font-bold border-border/60 bg-background/50 transition-all duration-300",
-            page > 1 ? "hover:bg-primary/10 hover:text-primary hover:border-primary/30 hover:-translate-y-0.5 active:scale-95" : "opacity-50 cursor-not-allowed"
+            "h-10 rounded-[1rem] border-black/10 bg-white/50 px-4 font-semibold text-slate-700 transition-colors hover:bg-black/5 dark:border-white/10 dark:bg-white/5 dark:text-white dark:hover:bg-white/10",
+            page <= 1 && "cursor-not-allowed opacity-50"
           )}
           disabled={page <= 1}
         >
           {page > 1 ? (
             <Link href={buildExploreHref(filters, page - 1)}>
-              <ChevronLeft className="mr-1 size-4" />
+              <ChevronLeft className="size-4 shrink-0" />
               Previous
             </Link>
           ) : (
             <span>
-              <ChevronLeft className="mr-1 size-4" />
+              <ChevronLeft className="size-4 shrink-0" />
               Previous
             </span>
           )}
         </Button>
 
-        <div className="flex items-center gap-1.5 hidden sm:flex">
-          {visiblePages.map((pageNumber) => (
-            <Button
-              key={pageNumber}
-              asChild={pageNumber !== page}
-              variant={pageNumber === page ? "default" : "outline"}
-              className={cn(
-                "min-w-10 h-10 rounded-xl font-bold transition-all duration-300",
-                pageNumber === page
-                  ? "bg-primary text-primary-foreground shadow-md ring-2 ring-primary/20 scale-105"
-                  : "border-border/60 bg-background/50 hover:bg-primary/10 hover:text-primary hover:border-primary/30 hover:-translate-y-0.5 active:scale-95"
-              )}
-            >
-              {pageNumber === page ? (
-                <span>{pageNumber}</span>
-              ) : (
-                <Link href={buildExploreHref(filters, pageNumber)}>{pageNumber}</Link>
-              )}
-            </Button>
-          ))}
+        <div className="hidden items-center gap-1.5 sm:flex">
+          {visiblePages.map((pageNumber) => {
+            const isActive = pageNumber === page;
+            return (
+              <Button
+                key={pageNumber}
+                asChild={!isActive}
+                variant={isActive ? "default" : "outline"}
+                className={cn(
+                  "min-w-10 h-10 rounded-[1rem] font-semibold transition-all duration-300",
+                  isActive
+                    ? "bg-slate-900 text-white shadow-md hover:bg-slate-800 dark:bg-[#29c2b3] dark:text-black dark:shadow-[0_18px_40px_-24px_rgba(41,194,179,0.75)] dark:hover:bg-[#22a194]"
+                    : "border-black/10 bg-white/50 text-slate-700 hover:bg-black/5 dark:border-white/10 dark:bg-white/5 dark:text-white dark:hover:bg-white/10"
+                )}
+              >
+                {isActive ? (
+                  <span>{pageNumber}</span>
+                ) : (
+                  <Link href={buildExploreHref(filters, pageNumber)}>{pageNumber}</Link>
+                )}
+              </Button>
+            );
+          })}
         </div>
 
         <Button
           asChild={page < totalPages}
           variant="outline"
           className={cn(
-            "rounded-xl h-10 px-4 font-bold border-border/60 bg-background/50 transition-all duration-300",
-            page < totalPages ? "hover:bg-primary/10 hover:text-primary hover:border-primary/30 hover:-translate-y-0.5 active:scale-95" : "opacity-50 cursor-not-allowed"
+            "h-10 rounded-[1rem] border-black/10 bg-white/50 px-4 font-semibold text-slate-700 transition-colors hover:bg-black/5 dark:border-white/10 dark:bg-white/5 dark:text-white dark:hover:bg-white/10",
+            page >= totalPages && "cursor-not-allowed opacity-50"
           )}
           disabled={page >= totalPages}
         >
           {page < totalPages ? (
             <Link href={buildExploreHref(filters, page + 1)}>
               Next
-              <ChevronRight className="ml-1 size-4" />
+              <ChevronRight className="size-4 shrink-0" />
             </Link>
           ) : (
             <span>
               Next
-              <ChevronRight className="ml-1 size-4" />
+              <ChevronRight className="size-4 shrink-0" />
             </span>
           )}
         </Button>
